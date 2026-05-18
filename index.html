@@ -179,6 +179,36 @@
     font-size: 12px; font-weight: 500;
   }
 
+  /* ---------- Feed actions bar ---------- */
+  .feed-actions {
+    display: flex; justify-content: space-between; gap: 12px;
+    margin-bottom: 18px; flex-wrap: wrap; align-items: center;
+  }
+  .feed-filters { display: flex; gap: 6px; flex-wrap: wrap; }
+  .feed-actions .chip {
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 6px 11px; border-radius: 999px; font-size: 13px; font-weight: 500;
+    color: var(--ink-2); cursor: pointer; transition: all .15s; font-family: inherit;
+  }
+  .feed-actions .chip:hover { background: var(--surface-2); }
+  .feed-actions .chip.active {
+    background: var(--ink); border-color: var(--ink); color: white;
+  }
+  .feed-post-actions { display: flex; gap: 6px; }
+  .feed-item.hidden { display: none; }
+  .vote-details {
+    margin-top: 12px; font-size: 13px;
+  }
+  .vote-details summary {
+    cursor: pointer; color: var(--primary); font-weight: 600;
+    list-style: none; padding: 4px 0;
+  }
+  .vote-details summary::-webkit-details-marker { display: none; }
+  .vote-details summary:before {
+    content: "▸ "; transition: transform .15s; display: inline-block;
+  }
+  .vote-details[open] summary:before { content: "▾ "; }
+
   /* ---------- Feed ---------- */
   .feed { display: grid; gap: 16px; }
   .post { padding: 18px 20px; }
@@ -354,6 +384,89 @@
   .event-rsvp { text-align: right; }
   .event-rsvp .attendees {
     font-size: 11px; color: var(--ink-3); margin-bottom: 6px;
+  }
+
+  /* ---------- View toggle (list / calendar) ---------- */
+  .view-toggle {
+    display: inline-flex; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 3px; gap: 2px;
+  }
+  .view-btn {
+    background: transparent; border: none; padding: 7px 12px;
+    border-radius: 8px; color: var(--ink-2); font-size: 13px; font-weight: 500;
+    cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+    font-family: inherit;
+  }
+  .view-btn:hover { background: var(--surface-2); }
+  .view-btn.active { background: var(--ink); color: white; }
+
+  /* ---------- Calendar ---------- */
+  .events-calendar {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden;
+  }
+  .cal-head {
+    display: flex; align-items: center; gap: 10px;
+    padding: 16px 18px; border-bottom: 1px solid var(--border);
+  }
+  .cal-head h2 {
+    margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -.01em;
+    min-width: 130px; text-align: center;
+  }
+  .cal-legend {
+    display: flex; gap: 16px; padding: 8px 18px; font-size: 12px;
+    color: var(--ink-3); background: var(--surface-2); border-bottom: 1px solid var(--border);
+  }
+  .cal-legend .dot {
+    display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+    margin-right: 4px; vertical-align: middle;
+  }
+  .cal-legend .dot.board { background: var(--primary); }
+  .cal-legend .dot.neighbor { background: var(--accent); }
+  .cal-legend .dot.booking { background: var(--info); }
+
+  .cal-grid, .cal-days {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+  }
+  .cal-dow {
+    padding: 10px 8px; font-size: 11px; text-transform: uppercase;
+    font-weight: 700; letter-spacing: .05em; color: var(--ink-3);
+    text-align: center; background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
+  }
+  .cal-day {
+    min-height: 86px; padding: 6px 8px;
+    border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    display: flex; flex-direction: column; gap: 3px; cursor: default;
+    transition: background .12s; background: var(--surface);
+  }
+  .cal-day:nth-child(7n) { border-right: none; }
+  .cal-day.muted { background: var(--surface-2); color: var(--ink-3); }
+  .cal-day.muted .cal-num { opacity: .55; }
+  .cal-day.today { background: var(--primary-soft); }
+  .cal-day:hover { background: var(--surface-2); }
+  .cal-num {
+    font-size: 12px; font-weight: 600; color: var(--ink-2);
+  }
+  .cal-day.today .cal-num {
+    background: var(--primary); color: white; border-radius: 50%;
+    width: 22px; height: 22px; display: grid; place-items: center;
+    font-size: 11px;
+  }
+  .cal-event {
+    background: var(--primary-soft); color: var(--primary);
+    font-size: 11px; padding: 2px 6px; border-radius: 4px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    font-weight: 600; cursor: pointer; transition: filter .12s;
+  }
+  .cal-event:hover { filter: brightness(.92); }
+  .cal-event.neighbor { background: var(--accent-soft); color: var(--accent); }
+  .cal-event.booking { background: var(--info-soft); color: var(--info); }
+  .cal-day.has-events { background: var(--surface); }
+
+  @media (max-width: 720px) {
+    .cal-day { min-height: 64px; }
+    .cal-event { font-size: 10px; padding: 1px 4px; }
   }
 
   /* ---------- Amenities ---------- */
@@ -739,11 +852,7 @@
     <nav class="topnav">
       <button class="nav-btn active" data-section="feed">
         <svg class="ic" viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1h-5v-7h-6v7H4a1 1 0 01-1-1V9.5z"/></svg>
-        Community
-      </button>
-      <button class="nav-btn" data-section="votes">
-        <svg class="ic" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-        Votes <span class="dot">1</span>
+        Community <span class="dot">4</span>
       </button>
       <button class="nav-btn" data-section="events">
         <svg class="ic" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -820,14 +929,29 @@
         </div>
       </div>
 
-      <div class="feed">
+      <!-- Feed filter + actions bar -->
+      <div class="feed-actions">
+        <div class="feed-filters">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="vote">🗳 Votes &amp; polls</button>
+          <button class="chip" data-filter="announcement">📢 Announcements</button>
+          <button class="chip" data-filter="discussion">💬 Discussion</button>
+          <button class="chip" data-filter="maintenance">🔧 Maintenance</button>
+        </div>
+        <div class="feed-post-actions">
+          <button class="btn ghost sm" onclick="openPollModal()">📊 Start a poll</button>
+          <button class="btn ghost sm" onclick="showToast('Composer opening…')">✏️ Post</button>
+        </div>
+      </div>
+
+      <div class="feed" id="feedList">
 
         <!-- Active vote in feed -->
-        <article class="card vote-card">
+        <article class="card vote-card feed-item" data-type="vote">
           <div class="card-body">
-            <span class="vote-status"><span class="pulse"></span> Active vote · closes in 3 days</span>
+            <span class="vote-status"><span class="pulse"></span> Active board vote · closes in 3 days</span>
             <h2>Should Maple Grove install EV charging stations in the parking lot?</h2>
-            <p class="vote-desc">The board is gathering resident input on adding 4 Level 2 EV chargers near the clubhouse. Estimated cost: $32k from reserves. <a href="#" onclick="showSection('votes'); return false;">See full proposal →</a></p>
+            <p class="vote-desc">The board is gathering resident input on adding 4 Level 2 EV chargers near the clubhouse. Estimated cost: $32k from reserves.</p>
 
             <div class="vote-options" id="voteOptions">
               <div class="vote-option-wrap"><div class="vote-option" data-vote="yes">
@@ -847,19 +971,66 @@
               </div></div>
             </div>
 
+            <details class="vote-details">
+              <summary>See reasons being discussed &amp; full proposal</summary>
+              <div style="background:var(--surface-2);border-radius:8px;padding:12px;margin-top:10px;font-size:13px;color:var(--ink-2)">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+                  <div>
+                    <div style="font-weight:600;color:var(--primary);margin-bottom:4px">In favor</div>
+                    <ul style="margin:0;padding-left:18px"><li>EV adoption growing in the neighborhood</li><li>Boosts property values</li><li>Usage fees recoup cost in ~5 years</li></ul>
+                  </div>
+                  <div>
+                    <div style="font-weight:600;color:var(--accent);margin-bottom:4px">Concerns</div>
+                    <ul style="margin:0;padding-left:18px"><li>Only a few residents currently drive EVs</li><li>Maintenance unknowns</li><li>Could wait until 2027 budget</li></ul>
+                  </div>
+                </div>
+                <div style="margin-top:10px"><a href="#" onclick="showToast('Opening proposal PDF…'); return false;">📄 Full proposal (PDF)</a></div>
+              </div>
+            </details>
+
             <div class="vote-meta">
               <span><strong id="voteCount">89</strong> of 142 residents voted</span>
               <span>Closes Friday, May 22</span>
             </div>
             <div class="vote-cta">
               <button class="btn" id="castVoteBtn" disabled>Cast my vote</button>
-              <button class="btn ghost sm" onclick="showSection('votes')">See discussion (12)</button>
+              <button class="btn ghost sm">💬 Discussion (12)</button>
             </div>
           </div>
         </article>
 
+        <!-- Neighbor poll: pickleball -->
+        <article class="card poll-card feed-item" data-type="vote" style="margin-bottom:0">
+          <div class="poll-author" style="padding-top:18px">
+            <div class="avatar" style="background:linear-gradient(135deg,#a98060,#c9986a)">MK</div>
+            <div>
+              <div class="name">Marcus Kim · Unit 87 <span class="tag accent">Neighbor poll</span></div>
+              <div class="sub">Started 2 days ago · closes in 5 days</div>
+            </div>
+          </div>
+          <h3 style="font-size:16px">Best night for a recurring pickleball meetup?</h3>
+          <div class="poll-options">
+            <div class="vote-option-wrap"><div class="vote-option" data-poll="p1" data-opt="tue">
+              <div class="marker"></div><div class="label">Tuesday evenings</div>
+              <div class="pct"><span class="pct-num">45</span>%</div>
+            </div></div>
+            <div class="vote-option-wrap"><div class="vote-option" data-poll="p1" data-opt="thu">
+              <div class="marker"></div><div class="label">Thursday evenings</div>
+              <div class="pct"><span class="pct-num">31</span>%</div>
+            </div></div>
+            <div class="vote-option-wrap"><div class="vote-option" data-poll="p1" data-opt="sat">
+              <div class="marker"></div><div class="label">Saturday mornings</div>
+              <div class="pct"><span class="pct-num">24</span>%</div>
+            </div></div>
+          </div>
+          <div class="poll-foot">
+            <span>📊 <strong>29</strong> neighbors weighed in</span>
+            <span style="margin-left:auto">💬 7 comments</span>
+          </div>
+        </article>
+
         <!-- Board announcement -->
-        <article class="card post">
+        <article class="card post feed-item" data-type="announcement">
           <div class="post-head">
             <div class="avatar" style="background:linear-gradient(135deg,#2f7a52,#4a9b71)">DR</div>
             <div class="meta">
@@ -889,8 +1060,38 @@
           </div>
         </article>
 
+        <!-- Neighbor poll: playgroup -->
+        <article class="card poll-card feed-item" data-type="vote" style="margin-bottom:0">
+          <div class="poll-author" style="padding-top:18px">
+            <div class="avatar" style="background:linear-gradient(135deg,#7a8f6e,#a3b696)">EP</div>
+            <div>
+              <div class="name">Elena Park · Unit 23 <span class="tag accent">Neighbor poll</span></div>
+              <div class="sub">Started yesterday · closes in 1 week</div>
+            </div>
+          </div>
+          <h3 style="font-size:16px">Anyone interested in a parents-of-toddlers playgroup?</h3>
+          <div class="poll-options">
+            <div class="vote-option-wrap"><div class="vote-option" data-poll="p2" data-opt="weekly">
+              <div class="marker"></div><div class="label">Yes, weekly would be great</div>
+              <div class="pct"><span class="pct-num">52</span>%</div>
+            </div></div>
+            <div class="vote-option-wrap"><div class="vote-option" data-poll="p2" data-opt="monthly">
+              <div class="marker"></div><div class="label">Monthly is more my speed</div>
+              <div class="pct"><span class="pct-num">36</span>%</div>
+            </div></div>
+            <div class="vote-option-wrap"><div class="vote-option" data-poll="p2" data-opt="no">
+              <div class="marker"></div><div class="label">Not for me, thanks</div>
+              <div class="pct"><span class="pct-num">12</span>%</div>
+            </div></div>
+          </div>
+          <div class="poll-foot">
+            <span>📊 <strong>14</strong> neighbors weighed in</span>
+            <span style="margin-left:auto">💬 5 comments</span>
+          </div>
+        </article>
+
         <!-- Neighbor post -->
-        <article class="card post">
+        <article class="card post feed-item" data-type="discussion">
           <div class="post-head">
             <div class="avatar" style="background:linear-gradient(135deg,#a98060,#c9986a)">MK</div>
             <div class="meta">
@@ -914,7 +1115,7 @@
         </article>
 
         <!-- Maintenance update -->
-        <article class="card post">
+        <article class="card post feed-item" data-type="maintenance">
           <div class="post-head">
             <div class="avatar" style="background:linear-gradient(135deg,#386a8a,#5b8fa8)">JT</div>
             <div class="meta">
@@ -938,27 +1139,29 @@
           </div>
         </article>
 
+        <!-- Recent decisions footer -->
+        <article class="card feed-item" data-type="announcement">
+          <div class="card-head">
+            <h3>Recent board decisions &amp; closed polls</h3>
+            <span style="font-size:12px;color:var(--ink-3)">Transparency log</span>
+          </div>
+          <ul class="activity-list">
+            <li><div class="icon">✓</div><div>Approved spring landscaping refresh ($8,400)</div><span class="when">2 weeks ago</span></li>
+            <li><div class="icon">✓</div><div>Approved pool hours extended to 9pm (summer)</div><span class="when">1 month ago</span></li>
+            <li><div class="icon">✕</div><div>Rejected proposal to add second tennis court</div><span class="when">2 months ago</span></li>
+            <li><div class="icon" style="background:var(--accent-soft);color:var(--accent)">📊</div><div><strong>Neighbor poll closed:</strong> Group walks on Saturday mornings — 78% yes</div><span class="when">1 week ago</span></li>
+            <li><div class="icon" style="background:var(--accent-soft);color:var(--accent)">📊</div><div><strong>Neighbor poll closed:</strong> Tool library in clubhouse — 64% interested, going to board</div><span class="when">2 weeks ago</span></li>
+          </ul>
+        </article>
+
       </div>
     </div>
 
-    <!-- ==== VOTES SECTION ==== -->
-    <div class="section" id="section-votes">
-      <div class="section-head with-action">
-        <div>
-          <h1>Votes &amp; Polls</h1>
-          <p>Your voice on board decisions and what neighbors are curious about.</p>
-        </div>
-        <button class="btn accent" onclick="openPollModal()">
-          <svg class="ic" viewBox="0 0 24 24"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
-          Start a neighbor poll
-        </button>
+    <!-- ==== VOTES SECTION (HIDDEN — merged into Community feed) ==== -->
+    <div class="section" id="section-votes" style="display:none">
+      <div class="section-head">
+        <h1>Votes &amp; Polls</h1>
       </div>
-
-      <div class="subtabs">
-        <button class="subtab active" data-subtab="board">Board votes <span style="background:var(--primary-soft);color:var(--primary);padding:1px 8px;border-radius:999px;font-size:11px;margin-left:4px">1 active</span></button>
-        <button class="subtab" data-subtab="neighbor">Neighbor polls <span style="background:var(--accent-soft);color:var(--accent);padding:1px 8px;border-radius:999px;font-size:11px;margin-left:4px">3 active</span></button>
-      </div>
-
       <div class="subpanel active" id="subpanel-board">
 
       <article class="card vote-card" style="margin-bottom:16px">
@@ -1147,12 +1350,80 @@
           <h1>Community Events</h1>
           <p>RSVP, suggest, and show up. The good stuff happens in person.</p>
         </div>
-        <button class="btn accent" onclick="openEventModal()">
-          <svg class="ic" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Create event
-        </button>
+        <div style="display:flex;gap:8px;align-items:center">
+          <div class="view-toggle">
+            <button class="view-btn active" data-view="list" onclick="switchView('list')">
+              <svg class="ic" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+              List
+            </button>
+            <button class="view-btn" data-view="calendar" onclick="switchView('calendar')">
+              <svg class="ic" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Calendar
+            </button>
+          </div>
+          <button class="btn accent" onclick="openEventModal()">
+            <svg class="ic" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Create event
+          </button>
+        </div>
       </div>
+
+      <!-- Calendar view -->
+      <div id="eventsCalendar" class="events-calendar" style="display:none">
+        <div class="cal-head">
+          <button class="icon-btn" onclick="changeMonth(-1)" title="Previous month">
+            <svg class="ic" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <h2 id="calMonthLabel">May 2026</h2>
+          <button class="icon-btn" onclick="changeMonth(1)" title="Next month">
+            <svg class="ic" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <button class="btn ghost sm" onclick="goToToday()" style="margin-left:auto">Today</button>
+        </div>
+        <div class="cal-legend">
+          <span><span class="dot board"></span> Board event</span>
+          <span><span class="dot neighbor"></span> Neighbor event</span>
+          <span><span class="dot booking"></span> Your booking</span>
+        </div>
+        <div class="cal-grid">
+          <div class="cal-dow">Sun</div><div class="cal-dow">Mon</div><div class="cal-dow">Tue</div><div class="cal-dow">Wed</div><div class="cal-dow">Thu</div><div class="cal-dow">Fri</div><div class="cal-dow">Sat</div>
+        </div>
+        <div class="cal-days" id="calDays"></div>
+      </div>
+
       <div class="events-grid" id="eventsGrid">
+
+        <article class="card event">
+          <div class="event-date"><div class="month">May</div><div class="day">20</div></div>
+          <div class="event-info">
+            <h4>Book Club <span class="tag accent">Neighbor event</span></h4>
+            <div class="sub">
+              <span>🕒 7pm</span>
+              <span>📍 Sarah's place (you're hosting)</span>
+              <span>📖 Discussing "The Library Book"</span>
+            </div>
+          </div>
+          <div class="event-rsvp">
+            <div class="attendees"><strong>6</strong> neighbors going</div>
+            <button class="btn sm ghost" disabled style="opacity:.6">You're hosting</button>
+          </div>
+        </article>
+
+        <article class="card event">
+          <div class="event-date"><div class="month">May</div><div class="day">23</div></div>
+          <div class="event-info">
+            <h4>Yoga in the Park <span class="tag accent">Neighbor event</span></h4>
+            <div class="sub">
+              <span>🕒 8–9am</span>
+              <span>📍 Clubhouse Lawn</span>
+              <span>🧘 Hosted by Elena Park</span>
+            </div>
+          </div>
+          <div class="event-rsvp">
+            <div class="attendees"><strong>12</strong> neighbors going</div>
+            <button class="btn sm rsvp-btn ghost" data-event="y1">RSVP</button>
+          </div>
+        </article>
 
         <article class="card event">
           <div class="event-date"><div class="month">May</div><div class="day">24</div></div>
@@ -1187,6 +1458,22 @@
         </article>
 
         <article class="card event">
+          <div class="event-date"><div class="month">May</div><div class="day">31</div></div>
+          <div class="event-info">
+            <h4>Dog Walk Meetup 🐕 <span class="tag accent">Neighbor event</span></h4>
+            <div class="sub">
+              <span>🕒 9am</span>
+              <span>📍 Front gate</span>
+              <span>🐾 Hosted by Rohan Patel</span>
+            </div>
+          </div>
+          <div class="event-rsvp">
+            <div class="attendees"><strong>8</strong> neighbors going</div>
+            <button class="btn sm rsvp-btn ghost" data-event="dw">RSVP</button>
+          </div>
+        </article>
+
+        <article class="card event">
           <div class="event-date"><div class="month">Jun</div><div class="day">07</div></div>
           <div class="event-info">
             <h4>Kids' Pool Opening Party 🏊</h4>
@@ -1215,6 +1502,22 @@
           <div class="event-rsvp">
             <div class="attendees"><strong id="rsvpCount4">19</strong> neighbors going</div>
             <button class="btn sm rsvp-btn ghost" data-event="4">RSVP</button>
+          </div>
+        </article>
+
+        <article class="card event">
+          <div class="event-date"><div class="month">Jun</div><div class="day">21</div></div>
+          <div class="event-info">
+            <h4>Father's Day BBQ 🥩</h4>
+            <div class="sub">
+              <span>🕒 12–4pm</span>
+              <span>📍 BBQ Patio</span>
+              <span>🎤 Hosted by HOA Board</span>
+            </div>
+          </div>
+          <div class="event-rsvp">
+            <div class="attendees"><strong>28</strong> neighbors going</div>
+            <button class="btn sm rsvp-btn ghost" data-event="fd">RSVP</button>
           </div>
         </article>
       </div>
@@ -1998,11 +2301,11 @@
     document.getElementById('voteCount2').textContent = total;
   }
 
-  document.querySelectorAll('.vote-option').forEach(opt => {
+  document.querySelectorAll('.vote-option[data-vote]').forEach(opt => {
     opt.addEventListener('click', () => {
       if (hasVoted) return;
       selectedVote = opt.dataset.vote;
-      document.querySelectorAll('.vote-option').forEach(o => {
+      document.querySelectorAll('.vote-option[data-vote]').forEach(o => {
         o.classList.toggle('selected', o.dataset.vote === selectedVote);
       });
       ['castVoteBtn', 'castVoteBtn2'].forEach(id => {
@@ -2193,6 +2496,43 @@
     if (list) list.prepend(li);
   }
 
+  // ---------- Feed filter chips ----------
+  document.querySelectorAll('.feed-filters .chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.feed-filters .chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const f = chip.dataset.filter;
+      document.querySelectorAll('.feed-item').forEach(item => {
+        item.classList.toggle('hidden', f !== 'all' && item.dataset.type !== f);
+      });
+    });
+  });
+
+  // ---------- Inline poll voting ----------
+  const pollVotes = {}; // {pollId: optKey}
+  document.querySelectorAll('.vote-option[data-poll]').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const pollId = opt.dataset.poll;
+      if (pollVotes[pollId]) return; // already voted
+      pollVotes[pollId] = opt.dataset.opt;
+      // mark selection within this poll only
+      document.querySelectorAll('.vote-option[data-poll="' + pollId + '"]').forEach(o => {
+        o.classList.toggle('selected', o.dataset.opt === opt.dataset.opt);
+      });
+      // visual bar fill (single bar on selected)
+      const wrap = opt.parentElement;
+      let bar = wrap.querySelector('.bar');
+      if (!bar) {
+        bar = document.createElement('div');
+        bar.className = 'bar';
+        wrap.insertBefore(bar, opt);
+      }
+      const pct = opt.querySelector('.pct-num').textContent;
+      bar.style.width = pct + '%';
+      showToast('Vote counted in neighbor poll');
+    });
+  });
+
   // ---------- Votes section subtabs ----------
   document.querySelectorAll('.subtab').forEach(t => {
     t.addEventListener('click', () => {
@@ -2288,6 +2628,10 @@
         <button class="btn sm ghost" disabled style="opacity:.6">You're hosting</button>
       </div>`;
     grid.prepend(article);
+    // Add to calendar data so it appears in calendar view
+    calendarEvents.push({ date: dateVal, title: name, type: 'neighbor', time: time, location: loc });
+    // Re-render calendar if it's currently visible
+    if (document.getElementById('eventsCalendar').style.display === 'block') renderCalendar();
     // Reset form
     document.getElementById('evName').value = '';
     document.getElementById('evDesc').value = '';
@@ -2322,36 +2666,50 @@
     if (!q) { showToast('Add a question'); return; }
     if (opts.length < 2) { showToast('Add at least 2 options'); return; }
     closeModal('pollModal');
-    // Switch to neighbor polls tab
-    document.querySelectorAll('.subtab').forEach(b => b.classList.toggle('active', b.dataset.subtab === 'neighbor'));
-    document.querySelectorAll('.subpanel').forEach(p => p.classList.toggle('active', p.id === 'subpanel-neighbor'));
-    showSection('votes');
-    // Build poll card
-    const container = document.getElementById('neighborPolls');
+    // Navigate to feed
+    showSection('feed');
+    // Build poll card to inject into feed
+    const newPollId = 'p_' + Date.now();
     const optionsHtml = opts.map((o, i) => `
-      <div class="vote-option-wrap"><div class="vote-option new-poll-opt" data-opt="${i}">
+      <div class="vote-option-wrap"><div class="vote-option" data-poll="${newPollId}" data-opt="${i}">
         <div class="marker"></div>
         <div class="label">${escapeHtml(o)}</div>
         <div class="pct"><span class="pct-num">0</span>%</div>
       </div></div>`).join('');
     const article = document.createElement('article');
-    article.className = 'card poll-card';
-    article.style.marginBottom = '12px';
+    article.className = 'card poll-card feed-item';
+    article.dataset.type = 'vote';
+    article.style.marginBottom = '0';
     article.innerHTML = `
-      <div class="poll-author">
+      <div class="poll-author" style="padding-top:18px">
         <div class="avatar">SC</div>
         <div>
-          <div class="name">Sarah Chen · Unit 142 (you)</div>
+          <div class="name">Sarah Chen · Unit 142 (you) <span class="tag accent">Neighbor poll</span></div>
           <div class="sub">Just now · closes in 3 days</div>
         </div>
       </div>
-      <h3>${escapeHtml(q)}</h3>
+      <h3 style="font-size:16px">${escapeHtml(q)}</h3>
       <div class="poll-options">${optionsHtml}</div>
       <div class="poll-foot">
         <span>📊 <strong>0</strong> neighbors weighed in yet</span>
         <span style="margin-left:auto">💬 0 comments</span>
       </div>`;
-    container.prepend(article);
+    // Insert after the active board vote (position 2 in feed)
+    const feedList = document.getElementById('feedList');
+    if (feedList.children.length > 1) {
+      feedList.insertBefore(article, feedList.children[1]);
+    } else {
+      feedList.prepend(article);
+    }
+    // Wire up click handlers for the new poll options
+    article.querySelectorAll('.vote-option[data-poll]').forEach(o => {
+      o.addEventListener('click', () => {
+        if (pollVotes[newPollId]) return;
+        pollVotes[newPollId] = o.dataset.opt;
+        article.querySelectorAll('.vote-option').forEach(x => x.classList.toggle('selected', x === o));
+        showToast('Vote counted in your poll');
+      });
+    });
     // Reset form
     document.getElementById('pollQuestion').value = '';
     document.querySelectorAll('#pollOptions input').forEach(i => i.value = '');
@@ -2361,6 +2719,95 @@
     li.innerHTML = '<div class="icon">📊</div><div>Started a neighbor poll: "' + escapeHtml(q) + '"</div><span class="when">just now</span>';
     const list = document.getElementById('activityList');
     if (list) list.prepend(li);
+  }
+
+  // ---------- Events: list / calendar view ----------
+  const TODAY = new Date(2026, 4, 18); // May 18, 2026
+  let calMonth = new Date(2026, 4, 1); // May 2026
+
+  // Event data — kept in sync with the list view
+  const calendarEvents = [
+    { date: '2026-05-24', title: 'Saturday Block Party', type: 'board', time: '4–8pm', location: 'Clubhouse Lawn' },
+    { date: '2026-05-27', title: 'Board Meeting', type: 'board', time: '7–8:30pm', location: 'Clubhouse Conf. Room' },
+    { date: '2026-06-07', title: "Kids' Pool Opening", type: 'board', time: '11am–2pm', location: 'Pool' },
+    { date: '2026-06-14', title: 'Garage Sale', type: 'neighbor', time: '8am–1pm', location: 'Throughout Maple Grove' },
+    { date: '2026-05-23', title: 'Yoga in the Park', type: 'neighbor', time: '8–9am', location: 'Clubhouse Lawn' },
+    { date: '2026-05-20', title: 'Book Club', type: 'neighbor', time: '7pm', location: "Sarah's place" },
+    { date: '2026-05-31', title: 'Dog Walk Meetup', type: 'neighbor', time: '9am', location: 'Front gate' },
+    { date: '2026-06-21', title: "Father's Day BBQ", type: 'board', time: '12–4pm', location: 'BBQ Patio' }
+  ];
+
+  function switchView(view) {
+    document.querySelectorAll('.view-btn').forEach(b => b.classList.toggle('active', b.dataset.view === view));
+    document.getElementById('eventsGrid').style.display = view === 'list' ? 'grid' : 'none';
+    document.getElementById('eventsCalendar').style.display = view === 'calendar' ? 'block' : 'none';
+    if (view === 'calendar') renderCalendar();
+  }
+  function changeMonth(delta) {
+    calMonth = new Date(calMonth.getFullYear(), calMonth.getMonth() + delta, 1);
+    renderCalendar();
+  }
+  function goToToday() {
+    calMonth = new Date(TODAY.getFullYear(), TODAY.getMonth(), 1);
+    renderCalendar();
+  }
+  function fmtDateKey(d) {
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+  function renderCalendar() {
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    document.getElementById('calMonthLabel').textContent = months[calMonth.getMonth()] + ' ' + calMonth.getFullYear();
+    const firstDay = new Date(calMonth.getFullYear(), calMonth.getMonth(), 1);
+    const startDow = firstDay.getDay();
+    const lastDay = new Date(calMonth.getFullYear(), calMonth.getMonth() + 1, 0).getDate();
+    const prevLast = new Date(calMonth.getFullYear(), calMonth.getMonth(), 0).getDate();
+
+    // Build events lookup
+    const eventsByDate = {};
+    calendarEvents.forEach(ev => {
+      if (!eventsByDate[ev.date]) eventsByDate[ev.date] = [];
+      eventsByDate[ev.date].push(ev);
+    });
+
+    const grid = document.getElementById('calDays');
+    grid.innerHTML = '';
+
+    const totalCells = Math.ceil((startDow + lastDay) / 7) * 7;
+    for (let i = 0; i < totalCells; i++) {
+      let dayNum, displayDate, muted = false;
+      if (i < startDow) {
+        dayNum = prevLast - (startDow - i - 1);
+        displayDate = new Date(calMonth.getFullYear(), calMonth.getMonth() - 1, dayNum);
+        muted = true;
+      } else if (i >= startDow + lastDay) {
+        dayNum = i - startDow - lastDay + 1;
+        displayDate = new Date(calMonth.getFullYear(), calMonth.getMonth() + 1, dayNum);
+        muted = true;
+      } else {
+        dayNum = i - startDow + 1;
+        displayDate = new Date(calMonth.getFullYear(), calMonth.getMonth(), dayNum);
+      }
+      const cell = document.createElement('div');
+      cell.className = 'cal-day' + (muted ? ' muted' : '');
+      if (!muted && fmtDateKey(displayDate) === fmtDateKey(TODAY)) cell.classList.add('today');
+      const num = document.createElement('div');
+      num.className = 'cal-num';
+      num.textContent = dayNum;
+      cell.appendChild(num);
+      const dayEvents = eventsByDate[fmtDateKey(displayDate)] || [];
+      dayEvents.forEach(ev => {
+        const chip = document.createElement('div');
+        chip.className = 'cal-event ' + ev.type;
+        chip.textContent = ev.title;
+        chip.title = ev.title + ' · ' + ev.time + ' · ' + ev.location;
+        chip.addEventListener('click', () => {
+          showToast(ev.title + ' — ' + ev.time + ' at ' + ev.location);
+        });
+        cell.appendChild(chip);
+      });
+      if (dayEvents.length) cell.classList.add('has-events');
+      grid.appendChild(cell);
+    }
   }
 
   // ---------- Init ----------
