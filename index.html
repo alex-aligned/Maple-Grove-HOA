@@ -467,6 +467,152 @@
   }
   .privacy-toggle input { margin: 0; }
 
+  /* ---------- Dues ---------- */
+  .dues-hero {
+    padding: 24px 26px; display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; background: linear-gradient(135deg, var(--surface) 0%, #f4faf6 100%);
+    border-left: 4px solid var(--primary);
+  }
+  .dues-status .dues-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .06em; color: var(--ink-3); margin-bottom: 4px;
+  }
+  .dues-amount {
+    font-size: 38px; font-weight: 700; letter-spacing: -.025em;
+    color: var(--ink); line-height: 1; margin-bottom: 8px;
+    font-variant-numeric: tabular-nums;
+  }
+  .dues-amount.owe { color: var(--accent); }
+  .dues-sub { font-size: 13px; color: var(--ink-2); }
+  .dues-cta { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+  .autopay-toggle {
+    display: flex; align-items: center; gap: 8px; font-size: 13px;
+    font-weight: 500; cursor: pointer; user-select: none;
+  }
+  .autopay-toggle input { display: none; }
+  .autopay-toggle .track {
+    width: 36px; height: 20px; border-radius: 999px; background: #d6d2c4;
+    position: relative; transition: background .15s;
+  }
+  .autopay-toggle .thumb {
+    position: absolute; top: 2px; left: 2px;
+    width: 16px; height: 16px; border-radius: 50%; background: white;
+    transition: transform .15s; box-shadow: 0 1px 3px rgba(0,0,0,.15);
+  }
+  .autopay-toggle input:checked + .track { background: var(--primary); }
+  .autopay-toggle input:checked + .track .thumb { transform: translateX(16px); }
+
+  .dues-row { display: grid; }
+  @media (max-width: 760px) { .dues-row { grid-template-columns: 1fr !important; } }
+
+  .dues-bar {
+    display: flex; height: 18px; border-radius: 10px; overflow: hidden;
+    border: 1px solid var(--border); margin-bottom: 18px;
+  }
+  .dues-seg { transition: filter .15s; }
+  .dues-seg:hover { filter: brightness(1.1); }
+  .dues-legend {
+    display: grid; grid-template-columns: 1fr; gap: 8px;
+    font-size: 13px;
+  }
+  .dues-legend > div {
+    display: grid; grid-template-columns: 16px 1fr auto auto; gap: 8px; align-items: center;
+  }
+  .dues-legend .sw {
+    width: 12px; height: 12px; border-radius: 3px; display: inline-block;
+  }
+  .dues-legend .cost {
+    color: var(--ink-3); font-variant-numeric: tabular-nums; min-width: 50px; text-align: right;
+  }
+
+  .dues-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .dues-table thead th {
+    text-align: left; padding: 12px 20px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .04em; color: var(--ink-3);
+    background: var(--surface-2); border-bottom: 1px solid var(--border);
+  }
+  .dues-table tbody td {
+    padding: 12px 20px; border-bottom: 1px solid var(--border);
+  }
+  .dues-table tbody tr:last-child td { border-bottom: none; }
+  .dues-table tbody tr:hover { background: var(--surface-2); }
+  .status-pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 600;
+  }
+  .status-pill.ok { background: var(--primary-soft); color: var(--primary); }
+  .status-pill.pending { background: var(--warn-soft); color: var(--warn); }
+
+  /* ---------- Payment methods (modal) ---------- */
+  .pay-method {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 10px;
+    cursor: pointer; background: var(--surface);
+  }
+  .pay-method + .pay-method { margin-top: 8px; }
+  .pay-method:hover { border-color: var(--primary); }
+  .pay-method.selected { border-color: var(--primary); background: var(--primary-soft); }
+  .pay-method .pm-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--surface-2); display: grid; place-items: center; font-size: 18px;
+  }
+  .pay-method .pm-info { flex: 1; font-size: 14px; }
+  .pay-method .pm-info .pm-sub { font-size: 12px; color: var(--ink-3); }
+
+  /* ---------- Polls (resident-created) ---------- */
+  .poll-card {
+    background: var(--surface);
+  }
+  .poll-card .poll-author {
+    display: flex; align-items: center; gap: 10px; padding: 14px 18px 0;
+  }
+  .poll-card .poll-author .avatar { width: 32px; height: 32px; font-size: 12px; }
+  .poll-card .poll-author .name { font-weight: 600; font-size: 13px; }
+  .poll-card .poll-author .sub { font-size: 12px; color: var(--ink-3); }
+  .poll-card h3 { padding: 12px 18px 0; margin: 0; font-size: 16px; font-weight: 600; }
+  .poll-card .poll-options { padding: 14px 18px; display: grid; gap: 8px; }
+  .poll-card .vote-option { padding: 10px 12px; font-size: 14px; }
+  .poll-card .poll-foot {
+    padding: 0 18px 14px; display: flex; gap: 12px; font-size: 12px;
+    color: var(--ink-3); align-items: center;
+  }
+
+  /* ---------- Section head with action ---------- */
+  .section-head.with-action {
+    display: flex; justify-content: space-between; align-items: flex-end; gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* ---------- Tabs (within section) ---------- */
+  .subtabs {
+    display: flex; gap: 4px; margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .subtab {
+    background: transparent; border: none; padding: 10px 14px;
+    color: var(--ink-3); font-size: 14px; font-weight: 600; cursor: pointer;
+    border-bottom: 2px solid transparent; margin-bottom: -1px; font-family: inherit;
+  }
+  .subtab:hover { color: var(--ink-2); }
+  .subtab.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+  .subpanel { display: none; }
+  .subpanel.active { display: block; }
+
+  /* ---------- Poll builder ---------- */
+  .poll-option-input {
+    display: flex; gap: 8px; margin-bottom: 8px; align-items: center;
+  }
+  .poll-option-input input {
+    flex: 1; padding: 9px 12px; border: 1px solid var(--border);
+    border-radius: 8px; font-size: 14px; font-family: inherit;
+  }
+  .poll-option-input .remove-opt {
+    background: transparent; border: none; color: var(--ink-3);
+    cursor: pointer; padding: 4px 8px; font-size: 18px; line-height: 1;
+  }
+  .poll-option-input .remove-opt:hover { color: var(--accent); }
+
   /* ---------- Profile ---------- */
   .profile-head {
     display: flex; align-items: center; gap: 18px;
@@ -610,6 +756,10 @@
       <button class="nav-btn" data-section="rules">
         <svg class="ic" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
         Rules
+      </button>
+      <button class="nav-btn" data-section="dues">
+        <svg class="ic" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        Dues
       </button>
     </nav>
     <div class="topright">
@@ -793,10 +943,23 @@
 
     <!-- ==== VOTES SECTION ==== -->
     <div class="section" id="section-votes">
-      <div class="section-head">
-        <h1>Votes &amp; Polls</h1>
-        <p>Your voice on board decisions, big and small.</p>
+      <div class="section-head with-action">
+        <div>
+          <h1>Votes &amp; Polls</h1>
+          <p>Your voice on board decisions and what neighbors are curious about.</p>
+        </div>
+        <button class="btn accent" onclick="openPollModal()">
+          <svg class="ic" viewBox="0 0 24 24"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
+          Start a neighbor poll
+        </button>
       </div>
+
+      <div class="subtabs">
+        <button class="subtab active" data-subtab="board">Board votes <span style="background:var(--primary-soft);color:var(--primary);padding:1px 8px;border-radius:999px;font-size:11px;margin-left:4px">1 active</span></button>
+        <button class="subtab" data-subtab="neighbor">Neighbor polls <span style="background:var(--accent-soft);color:var(--accent);padding:1px 8px;border-radius:999px;font-size:11px;margin-left:4px">3 active</span></button>
+      </div>
+
+      <div class="subpanel active" id="subpanel-board">
 
       <article class="card vote-card" style="margin-bottom:16px">
         <div class="card-body">
@@ -855,15 +1018,141 @@
           <li><div class="icon">✕</div><div>Rejected proposal to add second tennis court</div><span class="when">2 months ago</span></li>
         </ul>
       </div>
+
+      </div><!-- /subpanel board -->
+
+      <div class="subpanel" id="subpanel-neighbor">
+        <div class="card" style="padding:14px 18px;margin-bottom:14px;background:var(--surface-2);border-style:dashed">
+          <div style="font-size:13px;color:var(--ink-2)">
+            <strong>What are neighbor polls?</strong> Informal polls residents start to gauge interest — pickleball groups, summer BBQ ideas, anything. Not official board votes, but a great way to find your people.
+          </div>
+        </div>
+
+        <div id="neighborPolls">
+
+          <article class="card poll-card" style="margin-bottom:12px">
+            <div class="poll-author">
+              <div class="avatar" style="background:linear-gradient(135deg,#a98060,#c9986a)">MK</div>
+              <div>
+                <div class="name">Marcus Kim · Unit 87</div>
+                <div class="sub">Started 2 days ago · closes in 5 days</div>
+              </div>
+            </div>
+            <h3>Best night for a recurring pickleball meetup?</h3>
+            <div class="poll-options">
+              <div class="vote-option-wrap"><div class="vote-option" data-poll="p1" data-opt="tue">
+                <div class="marker"></div>
+                <div class="label">Tuesday evenings</div>
+                <div class="pct"><span class="pct-num">45</span>%</div>
+              </div></div>
+              <div class="vote-option-wrap"><div class="vote-option" data-poll="p1" data-opt="thu">
+                <div class="marker"></div>
+                <div class="label">Thursday evenings</div>
+                <div class="pct"><span class="pct-num">31</span>%</div>
+              </div></div>
+              <div class="vote-option-wrap"><div class="vote-option" data-poll="p1" data-opt="sat">
+                <div class="marker"></div>
+                <div class="label">Saturday mornings</div>
+                <div class="pct"><span class="pct-num">24</span>%</div>
+              </div></div>
+            </div>
+            <div class="poll-foot">
+              <span>📊 <strong>29</strong> neighbors weighed in</span>
+              <span style="margin-left:auto">💬 7 comments</span>
+            </div>
+          </article>
+
+          <article class="card poll-card" style="margin-bottom:12px">
+            <div class="poll-author">
+              <div class="avatar" style="background:linear-gradient(135deg,#7a8f6e,#a3b696)">EP</div>
+              <div>
+                <div class="name">Elena Park · Unit 23</div>
+                <div class="sub">Started yesterday · closes in 1 week</div>
+              </div>
+            </div>
+            <h3>Anyone interested in a parents-of-toddlers playgroup?</h3>
+            <div class="poll-options">
+              <div class="vote-option-wrap"><div class="vote-option" data-poll="p2" data-opt="weekly">
+                <div class="marker"></div>
+                <div class="label">Yes, weekly would be great</div>
+                <div class="pct"><span class="pct-num">52</span>%</div>
+              </div></div>
+              <div class="vote-option-wrap"><div class="vote-option" data-poll="p2" data-opt="monthly">
+                <div class="marker"></div>
+                <div class="label">Monthly is more my speed</div>
+                <div class="pct"><span class="pct-num">36</span>%</div>
+              </div></div>
+              <div class="vote-option-wrap"><div class="vote-option" data-poll="p2" data-opt="no">
+                <div class="marker"></div>
+                <div class="label">Not for me, thanks</div>
+                <div class="pct"><span class="pct-num">12</span>%</div>
+              </div></div>
+            </div>
+            <div class="poll-foot">
+              <span>📊 <strong>14</strong> neighbors weighed in</span>
+              <span style="margin-left:auto">💬 5 comments</span>
+            </div>
+          </article>
+
+          <article class="card poll-card" style="margin-bottom:12px">
+            <div class="poll-author">
+              <div class="avatar" style="background:linear-gradient(135deg,#8b6f8f,#a98fad)">JL</div>
+              <div>
+                <div class="name">Jamie Lopez · Unit 91</div>
+                <div class="sub">Started 4 days ago · closes tomorrow</div>
+              </div>
+            </div>
+            <h3>What theme for the summer block party?</h3>
+            <div class="poll-options">
+              <div class="vote-option-wrap"><div class="vote-option" data-poll="p3" data-opt="luau">
+                <div class="marker"></div>
+                <div class="label">Tropical luau 🌺</div>
+                <div class="pct"><span class="pct-num">38</span>%</div>
+              </div></div>
+              <div class="vote-option-wrap"><div class="vote-option" data-poll="p3" data-opt="bbq">
+                <div class="marker"></div>
+                <div class="label">Backyard BBQ classic 🍔</div>
+                <div class="pct"><span class="pct-num">41</span>%</div>
+              </div></div>
+              <div class="vote-option-wrap"><div class="vote-option" data-poll="p3" data-opt="potluck">
+                <div class="marker"></div>
+                <div class="label">International potluck 🌍</div>
+                <div class="pct"><span class="pct-num">21</span>%</div>
+              </div></div>
+            </div>
+            <div class="poll-foot">
+              <span>📊 <strong>42</strong> neighbors weighed in</span>
+              <span style="margin-left:auto">💬 11 comments</span>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <div class="card-head"><h3>Recently closed polls</h3></div>
+          <ul class="activity-list">
+            <li><div class="icon">✓</div><div><strong>Group walks on Saturday mornings?</strong> · 78% said yes — group starts May 30</div><span class="when">1 week ago</span></li>
+            <li><div class="icon">✓</div><div><strong>Add a tool library to the clubhouse?</strong> · 64% interested — Diane to take to the board</div><span class="when">2 weeks ago</span></li>
+          </ul>
+        </div>
+
+      </div><!-- /subpanel neighbor -->
+
     </div>
 
     <!-- ==== EVENTS SECTION ==== -->
     <div class="section" id="section-events">
-      <div class="section-head">
-        <h1>Community Events</h1>
-        <p>RSVP, suggest, and show up. The good stuff happens in person.</p>
+      <div class="section-head with-action">
+        <div>
+          <h1>Community Events</h1>
+          <p>RSVP, suggest, and show up. The good stuff happens in person.</p>
+        </div>
+        <button class="btn accent" onclick="openEventModal()">
+          <svg class="ic" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Create event
+        </button>
       </div>
-      <div class="events-grid">
+      <div class="events-grid" id="eventsGrid">
 
         <article class="card event">
           <div class="event-date"><div class="month">May</div><div class="day">24</div></div>
@@ -1180,6 +1469,121 @@
       </div>
     </div>
 
+    <!-- ==== DUES SECTION ==== -->
+    <div class="section" id="section-dues">
+      <div class="section-head">
+        <h1>HOA Dues</h1>
+        <p>Your dues at a glance, where they go, and a simple way to pay.</p>
+      </div>
+
+      <div class="dues-hero card">
+        <div class="dues-status">
+          <div class="dues-label">Current balance</div>
+          <div class="dues-amount"><span id="duesBalance">$0.00</span></div>
+          <div class="dues-sub" id="duesSubtext">✓ You're all caught up. Next payment $285.00 due June 1.</div>
+        </div>
+        <div class="dues-cta">
+          <button class="btn" id="payDuesBtn" onclick="openPaymentModal()">
+            <svg class="ic" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            Pay June dues ($285)
+          </button>
+          <label class="autopay-toggle">
+            <input type="checkbox" id="autopayToggle">
+            <span class="track"><span class="thumb"></span></span>
+            <span>Autopay <span style="color:var(--ink-3);font-weight:400;font-size:12px">· next: Jun 1</span></span>
+          </label>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px" class="dues-row">
+
+        <!-- Where dues go -->
+        <div class="card">
+          <div class="card-head">
+            <h3>Where your dues go</h3>
+            <span style="font-size:12px;color:var(--ink-3)">Monthly breakdown</span>
+          </div>
+          <div class="card-body">
+            <div class="dues-bar">
+              <div class="dues-seg" style="width:35%;background:#2f7a52" title="Reserves 35%"></div>
+              <div class="dues-seg" style="width:25%;background:#386a8a" title="Maintenance 25%"></div>
+              <div class="dues-seg" style="width:15%;background:#7a8f6e" title="Landscaping 15%"></div>
+              <div class="dues-seg" style="width:10%;background:#a98060" title="Amenities 10%"></div>
+              <div class="dues-seg" style="width:10%;background:#c2862b" title="Insurance 10%"></div>
+              <div class="dues-seg" style="width:5%;background:#8b6f8f" title="Admin 5%"></div>
+            </div>
+            <div class="dues-legend">
+              <div><span class="sw" style="background:#2f7a52"></span> Reserves <strong>35%</strong> <span class="cost">$99.75</span></div>
+              <div><span class="sw" style="background:#386a8a"></span> Maintenance <strong>25%</strong> <span class="cost">$71.25</span></div>
+              <div><span class="sw" style="background:#7a8f6e"></span> Landscaping <strong>15%</strong> <span class="cost">$42.75</span></div>
+              <div><span class="sw" style="background:#a98060"></span> Amenities &amp; pool <strong>10%</strong> <span class="cost">$28.50</span></div>
+              <div><span class="sw" style="background:#c2862b"></span> Insurance <strong>10%</strong> <span class="cost">$28.50</span></div>
+              <div><span class="sw" style="background:#8b6f8f"></span> Admin &amp; legal <strong>5%</strong> <span class="cost">$14.25</span></div>
+            </div>
+            <a href="#" onclick="showToast('Opening Q1 financial report…'); return false;" style="display:inline-block;margin-top:14px;font-size:13px;font-weight:600">See Q1 2026 financial report →</a>
+          </div>
+        </div>
+
+        <!-- Quick facts -->
+        <div class="card">
+          <div class="card-head">
+            <h3>Account at a glance</h3>
+          </div>
+          <ul class="activity-list">
+            <li>
+              <div class="icon" style="background:var(--primary-soft);color:var(--primary)">$</div>
+              <div>
+                <div><strong>Monthly dues:</strong> $285.00</div>
+                <div style="font-size:12px;color:var(--ink-3)">Set by board · last changed Jan 2026</div>
+              </div>
+            </li>
+            <li>
+              <div class="icon" style="background:var(--info-soft);color:var(--info)">📆</div>
+              <div>
+                <div><strong>Due on the 1st of each month</strong></div>
+                <div style="font-size:12px;color:var(--ink-3)">10-day grace period · late fee $25 after</div>
+              </div>
+            </li>
+            <li>
+              <div class="icon" style="background:var(--primary-soft);color:var(--primary)">✓</div>
+              <div>
+                <div><strong>Account standing:</strong> Good</div>
+                <div style="font-size:12px;color:var(--ink-3)">5 consecutive on-time payments</div>
+              </div>
+            </li>
+            <li>
+              <div class="icon" style="background:var(--surface-2);color:var(--ink-2)">🏦</div>
+              <div>
+                <div><strong>Payment method:</strong> Bank ····4892</div>
+                <div style="font-size:12px;color:var(--ink-3)">ACH · no fees · <a href="#" onclick="showToast('Manage methods'); return false;">Manage</a></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Payment history -->
+      <div class="card" style="margin-top:16px">
+        <div class="card-head">
+          <h3>Payment history</h3>
+          <a href="#" onclick="showToast('Statement download starting…'); return false;" style="font-size:13px;font-weight:600">Download statement</a>
+        </div>
+        <table class="dues-table">
+          <thead>
+            <tr><th>Date</th><th>Description</th><th>Method</th><th style="text-align:right">Amount</th><th>Status</th></tr>
+          </thead>
+          <tbody id="duesHistory">
+            <tr><td>May 1, 2026</td><td>Monthly dues — May</td><td>ACH ····4892</td><td style="text-align:right">$285.00</td><td><span class="status-pill ok">Paid</span></td></tr>
+            <tr><td>Apr 1, 2026</td><td>Monthly dues — April</td><td>ACH ····4892</td><td style="text-align:right">$285.00</td><td><span class="status-pill ok">Paid</span></td></tr>
+            <tr><td>Mar 14, 2026</td><td>Pool key fob replacement</td><td>Card ····2341</td><td style="text-align:right">$25.00</td><td><span class="status-pill ok">Paid</span></td></tr>
+            <tr><td>Mar 1, 2026</td><td>Monthly dues — March</td><td>ACH ····4892</td><td style="text-align:right">$285.00</td><td><span class="status-pill ok">Paid</span></td></tr>
+            <tr><td>Feb 1, 2026</td><td>Monthly dues — February</td><td>ACH ····4892</td><td style="text-align:right">$285.00</td><td><span class="status-pill ok">Paid</span></td></tr>
+            <tr><td>Jan 1, 2026</td><td>Monthly dues — January</td><td>ACH ····4892</td><td style="text-align:right">$285.00</td><td><span class="status-pill ok">Paid</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
     <!-- ==== PROFILE SECTION ==== -->
     <div class="section" id="section-profile">
       <div class="section-head">
@@ -1235,6 +1639,11 @@
         <div class="value">2 active requests</div>
         <div class="sub">All on track · See details</div>
       </div>
+      <div class="rail-item">
+        <div class="label">Next dues payment</div>
+        <div class="value">$285.00 · Jun 1</div>
+        <div class="sub"><a href="#" onclick="showSection('dues'); return false;">Pay early →</a></div>
+      </div>
     </div>
 
     <div class="card neighbors">
@@ -1266,9 +1675,11 @@
     <div class="card" style="padding:16px 18px">
       <h3 style="margin:0 0 8px;font-size:14px;font-weight:600">Quick actions</h3>
       <div style="display:grid;gap:6px">
+        <button class="btn ghost sm" style="justify-content:flex-start" onclick="openPaymentModal()">💳 Pay dues</button>
+        <button class="btn ghost sm" style="justify-content:flex-start" onclick="openEventModal()">🎉 Create an event</button>
+        <button class="btn ghost sm" style="justify-content:flex-start" onclick="openPollModal()">📊 Start a poll</button>
         <button class="btn ghost sm" style="justify-content:flex-start" onclick="showSection('amenities')">📅 Book an amenity</button>
         <button class="btn ghost sm" style="justify-content:flex-start" onclick="openConcernModal()">🔧 Submit a request or concern</button>
-        <button class="btn ghost sm" style="justify-content:flex-start" onclick="showToast('Composer opening…')">✏️ Post to community</button>
       </div>
     </div>
   </aside>
@@ -1305,6 +1716,170 @@
     <div class="modal-foot">
       <button class="btn ghost" onclick="closeModal('bookingModal')">Cancel</button>
       <button class="btn" onclick="confirmBooking()">Confirm booking</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAYMENT MODAL ============ -->
+<div class="modal-backdrop" id="paymentModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Pay HOA dues</h3>
+      <button class="close-btn" onclick="closeModal('paymentModal')">×</button>
+    </div>
+    <div class="modal-body">
+      <div style="background:var(--surface-2);border-radius:10px;padding:14px 16px;margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;font-size:14px">
+          <span>June dues</span><span style="font-variant-numeric:tabular-nums">$285.00</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--ink-3);margin-top:4px">
+          <span>Due June 1, 2026</span><span>Account ····142</span>
+        </div>
+        <div style="border-top:1px dashed var(--border);margin-top:10px;padding-top:10px;display:flex;justify-content:space-between;font-weight:600">
+          <span>Total</span><span style="font-variant-numeric:tabular-nums">$285.00</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Payment method</label>
+        <div id="payMethods">
+          <button class="pay-method selected" data-method="ach">
+            <div class="pm-icon">🏦</div>
+            <div class="pm-info">
+              <div style="font-weight:600">Bank account ····4892</div>
+              <div class="pm-sub">ACH transfer · no fees · 1–2 business days</div>
+            </div>
+            <div class="marker" style="width:18px;height:18px;border-radius:50%;border:2px solid var(--primary);background:var(--primary);box-shadow:inset 0 0 0 3px white"></div>
+          </button>
+          <button class="pay-method" data-method="card">
+            <div class="pm-icon">💳</div>
+            <div class="pm-info">
+              <div style="font-weight:600">Card ····2341</div>
+              <div class="pm-sub">Instant · 2.9% processing fee ($8.27)</div>
+            </div>
+            <div class="marker" style="width:18px;height:18px;border-radius:50%;border:2px solid var(--border)"></div>
+          </button>
+          <button class="pay-method" data-method="new">
+            <div class="pm-icon">+</div>
+            <div class="pm-info">
+              <div style="font-weight:600">Add a new payment method</div>
+              <div class="pm-sub">Bank, debit, or credit card</div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn ghost" onclick="closeModal('paymentModal')">Cancel</button>
+      <button class="btn" onclick="confirmPayment()">Pay $285.00</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CREATE EVENT MODAL ============ -->
+<div class="modal-backdrop" id="eventModal">
+  <div class="modal" style="max-width:540px">
+    <div class="modal-head">
+      <h3>Create a community event</h3>
+      <button class="close-btn" onclick="closeModal('eventModal')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label>Event name</label>
+        <input type="text" id="evName" placeholder="e.g., Saturday morning yoga in the park">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="field">
+          <label>Date</label>
+          <input type="date" id="evDate" value="2026-05-30">
+        </div>
+        <div class="field">
+          <label>Start time</label>
+          <input type="text" id="evTime" value="10:00 AM" placeholder="10:00 AM">
+        </div>
+      </div>
+      <div class="field">
+        <label>Location</label>
+        <select id="evLocation">
+          <option>Clubhouse Lawn</option>
+          <option>Community Pool</option>
+          <option>Tennis Court</option>
+          <option>BBQ Patio</option>
+          <option>My unit / driveway</option>
+          <option>Other (specify in description)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Description &amp; what to bring</label>
+        <textarea id="evDesc" rows="3" placeholder="Quick description of the vibe, what to expect, what to bring…"></textarea>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="field">
+          <label>Open to</label>
+          <select id="evAudience">
+            <option>All Maple Grove residents</option>
+            <option>Just my interest groups</option>
+            <option>Invite specific neighbors</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Max attendees (optional)</label>
+          <input type="text" id="evMax" placeholder="e.g., 20">
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn ghost" onclick="closeModal('eventModal')">Cancel</button>
+      <button class="btn" onclick="createEvent()">Post event</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CREATE POLL MODAL ============ -->
+<div class="modal-backdrop" id="pollModal">
+  <div class="modal" style="max-width:520px">
+    <div class="modal-head">
+      <h3>Start a neighbor poll</h3>
+      <button class="close-btn" onclick="closeModal('pollModal')">×</button>
+    </div>
+    <div class="modal-body">
+      <div style="background:var(--info-soft);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--info);margin-bottom:14px">
+        <strong>💡 Heads up:</strong> Neighbor polls are informal — they gauge interest and gather input, but they're not official HOA board votes.
+      </div>
+      <div class="field">
+        <label>Your question</label>
+        <input type="text" id="pollQuestion" placeholder="e.g., Want to start a Tuesday-evening pickleball group?">
+      </div>
+      <div class="field">
+        <label>Options</label>
+        <div id="pollOptions">
+          <div class="poll-option-input"><input type="text" placeholder="Option 1 — e.g., Yes, count me in"><button class="remove-opt" onclick="this.parentElement.remove()">×</button></div>
+          <div class="poll-option-input"><input type="text" placeholder="Option 2 — e.g., Maybe, depends on the night"><button class="remove-opt" onclick="this.parentElement.remove()">×</button></div>
+        </div>
+        <button class="btn ghost sm" id="addOptionBtn" onclick="addPollOption()">+ Add another option</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="field">
+          <label>How long?</label>
+          <select id="pollDuration">
+            <option>3 days</option>
+            <option>1 week</option>
+            <option>2 weeks</option>
+            <option>Until I close it</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Who can vote</label>
+          <select id="pollAudience">
+            <option>All residents</option>
+            <option>Just my interest groups</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn ghost" onclick="closeModal('pollModal')">Cancel</button>
+      <button class="btn" onclick="createPoll()">Start poll</button>
     </div>
   </div>
 </div>
@@ -1614,6 +2189,176 @@
     // add activity entry
     const li = document.createElement('li');
     li.innerHTML = '<div class="icon">💬</div><div>Submitted to the board: "' + subj + '"</div><span class="when">just now</span>';
+    const list = document.getElementById('activityList');
+    if (list) list.prepend(li);
+  }
+
+  // ---------- Votes section subtabs ----------
+  document.querySelectorAll('.subtab').forEach(t => {
+    t.addEventListener('click', () => {
+      const name = t.dataset.subtab;
+      document.querySelectorAll('.subtab').forEach(b => b.classList.toggle('active', b === t));
+      document.querySelectorAll('.subpanel').forEach(p => p.classList.toggle('active', p.id === 'subpanel-' + name));
+    });
+  });
+
+  // ---------- Dues: payment ----------
+  function openPaymentModal() {
+    document.getElementById('paymentModal').classList.add('show');
+  }
+  document.querySelectorAll('.pay-method').forEach(m => {
+    m.addEventListener('click', () => {
+      if (m.dataset.method === 'new') {
+        showToast('New payment method flow coming soon');
+        return;
+      }
+      document.querySelectorAll('.pay-method').forEach(o => {
+        o.classList.toggle('selected', o === m);
+        const mk = o.querySelector('.marker');
+        if (mk) {
+          if (o === m) { mk.style.borderColor = 'var(--primary)'; mk.style.background = 'var(--primary)'; mk.style.boxShadow = 'inset 0 0 0 3px white'; }
+          else { mk.style.borderColor = 'var(--border)'; mk.style.background = 'transparent'; mk.style.boxShadow = 'none'; }
+        }
+      });
+    });
+  });
+  function confirmPayment() {
+    closeModal('paymentModal');
+    // Update dues hero
+    document.getElementById('duesBalance').textContent = '$0.00';
+    document.getElementById('duesSubtext').textContent = '✓ June dues paid. Next payment $285.00 due July 1.';
+    const btn = document.getElementById('payDuesBtn');
+    btn.innerHTML = '✓ June paid · See July';
+    btn.disabled = true;
+    btn.style.opacity = '.6';
+    // Prepend to payment history
+    const tbody = document.getElementById('duesHistory');
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td>May 18, 2026</td><td>Monthly dues — June (early)</td><td>ACH ····4892</td><td style="text-align:right">$285.00</td><td><span class="status-pill pending">Processing</span></td>';
+    tbody.prepend(tr);
+    // Profile stat
+    showToast('Payment scheduled — confirmation email on the way');
+    // Activity
+    const li = document.createElement('li');
+    li.innerHTML = '<div class="icon">💰</div><div>Paid June dues — $285.00</div><span class="when">just now</span>';
+    const list = document.getElementById('activityList');
+    if (list) list.prepend(li);
+  }
+  // autopay toggle
+  const autopay = document.getElementById('autopayToggle');
+  if (autopay) {
+    autopay.addEventListener('change', () => {
+      showToast(autopay.checked ? 'Autopay turned on — June 1 and every 1st after' : 'Autopay turned off');
+    });
+  }
+
+  // ---------- Create event ----------
+  function openEventModal() {
+    document.getElementById('eventModal').classList.add('show');
+  }
+  function createEvent() {
+    const name = document.getElementById('evName').value.trim();
+    const dateVal = document.getElementById('evDate').value;
+    const time = document.getElementById('evTime').value.trim();
+    const loc = document.getElementById('evLocation').value;
+    const desc = document.getElementById('evDesc').value.trim();
+    if (!name || !dateVal || !time) { showToast('Add a name, date, and time'); return; }
+    closeModal('eventModal');
+    // Build event card
+    const d = new Date(dateVal + 'T00:00:00');
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const month = months[d.getMonth()];
+    const day = d.getDate();
+    const grid = document.getElementById('eventsGrid');
+    const article = document.createElement('article');
+    article.className = 'card event';
+    article.innerHTML = `
+      <div class="event-date"><div class="month">${month}</div><div class="day">${day}</div></div>
+      <div class="event-info">
+        <h4>${escapeHtml(name)} <span class="tag accent" style="margin-left:6px">Neighbor event</span></h4>
+        <div class="sub">
+          <span>🕒 ${escapeHtml(time)}</span>
+          <span>📍 ${escapeHtml(loc)}</span>
+          <span>👋 Hosted by Sarah Chen (you)</span>
+        </div>
+        ${desc ? '<div style="font-size:13px;color:var(--ink-2);margin-top:6px">' + escapeHtml(desc) + '</div>' : ''}
+      </div>
+      <div class="event-rsvp">
+        <div class="attendees"><strong>0</strong> neighbors going yet</div>
+        <button class="btn sm ghost" disabled style="opacity:.6">You're hosting</button>
+      </div>`;
+    grid.prepend(article);
+    // Reset form
+    document.getElementById('evName').value = '';
+    document.getElementById('evDesc').value = '';
+    document.getElementById('evMax').value = '';
+    showToast('Event posted! Neighbors will see it in the feed.');
+    // Activity
+    const li = document.createElement('li');
+    li.innerHTML = '<div class="icon">🎉</div><div>Posted a community event: "' + escapeHtml(name) + '"</div><span class="when">just now</span>';
+    const list = document.getElementById('activityList');
+    if (list) list.prepend(li);
+  }
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  // ---------- Create poll ----------
+  function openPollModal() {
+    document.getElementById('pollModal').classList.add('show');
+  }
+  function addPollOption() {
+    const container = document.getElementById('pollOptions');
+    if (container.children.length >= 5) { showToast('Maximum 5 options'); return; }
+    const div = document.createElement('div');
+    div.className = 'poll-option-input';
+    div.innerHTML = '<input type="text" placeholder="Option ' + (container.children.length + 1) + '"><button class="remove-opt" onclick="this.parentElement.remove()">×</button>';
+    container.appendChild(div);
+  }
+  function createPoll() {
+    const q = document.getElementById('pollQuestion').value.trim();
+    const inputs = document.querySelectorAll('#pollOptions input');
+    const opts = Array.from(inputs).map(i => i.value.trim()).filter(v => v);
+    if (!q) { showToast('Add a question'); return; }
+    if (opts.length < 2) { showToast('Add at least 2 options'); return; }
+    closeModal('pollModal');
+    // Switch to neighbor polls tab
+    document.querySelectorAll('.subtab').forEach(b => b.classList.toggle('active', b.dataset.subtab === 'neighbor'));
+    document.querySelectorAll('.subpanel').forEach(p => p.classList.toggle('active', p.id === 'subpanel-neighbor'));
+    showSection('votes');
+    // Build poll card
+    const container = document.getElementById('neighborPolls');
+    const optionsHtml = opts.map((o, i) => `
+      <div class="vote-option-wrap"><div class="vote-option new-poll-opt" data-opt="${i}">
+        <div class="marker"></div>
+        <div class="label">${escapeHtml(o)}</div>
+        <div class="pct"><span class="pct-num">0</span>%</div>
+      </div></div>`).join('');
+    const article = document.createElement('article');
+    article.className = 'card poll-card';
+    article.style.marginBottom = '12px';
+    article.innerHTML = `
+      <div class="poll-author">
+        <div class="avatar">SC</div>
+        <div>
+          <div class="name">Sarah Chen · Unit 142 (you)</div>
+          <div class="sub">Just now · closes in 3 days</div>
+        </div>
+      </div>
+      <h3>${escapeHtml(q)}</h3>
+      <div class="poll-options">${optionsHtml}</div>
+      <div class="poll-foot">
+        <span>📊 <strong>0</strong> neighbors weighed in yet</span>
+        <span style="margin-left:auto">💬 0 comments</span>
+      </div>`;
+    container.prepend(article);
+    // Reset form
+    document.getElementById('pollQuestion').value = '';
+    document.querySelectorAll('#pollOptions input').forEach(i => i.value = '');
+    showToast('Poll started! Neighbors will see it in Votes & Polls.');
+    // Activity
+    const li = document.createElement('li');
+    li.innerHTML = '<div class="icon">📊</div><div>Started a neighbor poll: "' + escapeHtml(q) + '"</div><span class="when">just now</span>';
     const list = document.getElementById('activityList');
     if (list) list.prepend(li);
   }
