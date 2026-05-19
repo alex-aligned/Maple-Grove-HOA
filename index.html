@@ -354,6 +354,116 @@
     font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 999px;
   }
 
+  /* ---------- Neighbors near you (Birch Way block widget) ---------- */
+  .neighbors-near { padding: 0; overflow: hidden; }
+  .neighbors-near-head {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .neighbors-near-head h3 {
+    margin: 0 0 4px; font-size: 14px; font-weight: 600;
+  }
+  .neighbors-near-head .sub {
+    font-size: 12px; color: var(--ink-3);
+    display: flex; gap: 6px; align-items: center;
+  }
+  .neighbors-near-head .sub .block-name {
+    color: var(--primary); font-weight: 600;
+  }
+  .neighbors-near-list {
+    max-height: 360px; overflow-y: auto;
+    padding: 4px 0;
+  }
+  .neighbor-near {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 18px;
+    cursor: pointer;
+    background: transparent; border: none; width: 100%; text-align: left;
+    font-family: inherit;
+    transition: background .12s;
+  }
+  .neighbor-near:hover { background: var(--surface-2); }
+  .neighbor-near .avatar {
+    width: 34px; height: 34px; font-size: 12px;
+    flex-shrink: 0;
+  }
+  .avatar.privacy-min {
+    background: #c5bcaa; color: white;
+  }
+  .neighbor-near .info { line-height: 1.3; flex: 1; min-width: 0; }
+  .neighbor-near .name { font-size: 13px; font-weight: 600; color: var(--ink); }
+  .neighbor-near .meta { font-size: 11px; color: var(--ink-3); }
+  .neighbor-near .hook {
+    font-size: 11px; color: var(--ink-2);
+    margin-top: 3px;
+    overflow: hidden; text-overflow: ellipsis;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  }
+  .neighbors-near-foot {
+    padding: 10px 18px; border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  .neighbors-near-foot .link-btn {
+    background: transparent; border: none; cursor: pointer;
+    color: var(--primary); font-weight: 600; font-size: 12px;
+    font-family: inherit; padding: 4px 0;
+  }
+  .neighbors-near-foot .link-btn:hover { text-decoration: underline; }
+
+  /* Small block tag used on feed posts and elsewhere */
+  .block-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 500;
+    color: var(--ink-3);
+    margin-left: 4px;
+  }
+  .block-tag::before { content: '· '; }
+  .block-tag.mine { color: var(--primary); font-weight: 600; }
+
+  /* Household detail modal */
+  .household-detail-head {
+    display: flex; gap: 14px; align-items: center;
+    padding: 4px 0 16px;
+  }
+  .household-detail-head .name { font-size: 18px; font-weight: 600; color: var(--ink); }
+  .household-detail-head .meta { color: var(--ink-3); font-size: 13px; margin-top: 2px; }
+  .household-detail-rows { margin-top: 4px; }
+  .household-detail-row {
+    display: flex; gap: 12px; padding: 12px 0;
+    border-top: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .household-detail-row .icon-cell {
+    width: 30px; height: 30px; border-radius: 7px;
+    background: var(--primary-soft); color: var(--primary);
+    display: grid; place-items: center; font-size: 14px;
+    flex-shrink: 0;
+  }
+  .household-detail-row .text { font-size: 14px; color: var(--ink); line-height: 1.45; flex: 1; }
+  .household-detail-row .text .lbl {
+    font-size: 11px; color: var(--ink-3); font-weight: 600;
+    text-transform: uppercase; letter-spacing: .04em;
+    margin-bottom: 3px;
+  }
+  .household-detail-foot {
+    padding-top: 16px; margin-top: 4px;
+    border-top: 1px solid var(--border);
+    display: flex; gap: 8px; justify-content: flex-end;
+  }
+  .household-detail-empty {
+    color: var(--ink-3); font-style: italic; font-size: 13px;
+    padding: 14px 0; border-top: 1px solid var(--border);
+    line-height: 1.45;
+  }
+
+  /* "From your block" RSVP context line */
+  .attendees-block-context {
+    font-size: 12px; color: var(--primary);
+    margin-top: 4px;
+    display: flex; gap: 4px; align-items: center; flex-wrap: wrap;
+  }
+  .attendees-block-context strong { color: var(--primary); font-weight: 600; }
+
   /* ---------- Sections ---------- */
   .section { display: none; }
   .section.active { display: block; }
@@ -492,6 +602,198 @@
   .amenity-body { padding: 14px 16px; }
   .amenity-body h4 { margin: 0 0 4px; font-size: 15px; font-weight: 600; }
   .amenity-body .sub { font-size: 12px; color: var(--ink-3); }
+
+  /* ---------- Amenity sub-tabs ---------- */
+  .amenity-subtabs {
+    display: flex; gap: 4px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid var(--border);
+  }
+  .amenity-subtab {
+    background: transparent; border: none; padding: 10px 16px;
+    color: var(--ink-3); font-size: 14px; font-weight: 600; cursor: pointer;
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+    font-family: inherit; transition: color .12s, border-color .12s;
+  }
+  .amenity-subtab:hover { color: var(--ink-2); }
+  .amenity-subtab.active {
+    color: var(--primary); border-bottom-color: var(--primary);
+  }
+  .amenity-panel { display: none; }
+  .amenity-panel.active { display: block; }
+
+  /* ---------- Local services directory ---------- */
+  .services-chips {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px;
+  }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+
+  /* Service card */
+  .svc-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    cursor: pointer;
+    transition: border-color .15s, box-shadow .15s, transform .15s;
+    display: flex; flex-direction: column;
+  }
+  .svc-card:hover {
+    border-color: var(--primary-soft);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .svc-card.sponsored {
+    background: linear-gradient(180deg, #faf6ec 0%, var(--surface) 100%);
+    border-color: #e8dbb8;
+  }
+  .svc-card.sponsored:hover {
+    border-color: #d4be83;
+  }
+
+  .svc-card-head {
+    display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px;
+  }
+  .svc-icon {
+    width: 38px; height: 38px; border-radius: 8px;
+    display: grid; place-items: center;
+    color: white; font-size: 18px;
+    flex-shrink: 0;
+  }
+  .svc-meta { flex: 1; min-width: 0; line-height: 1.3; }
+  .svc-meta h4 {
+    margin: 0 0 2px; font-size: 15px; font-weight: 600;
+    color: var(--ink);
+  }
+  .svc-meta .svc-cat {
+    font-size: 11px; color: var(--ink-3);
+    text-transform: uppercase; letter-spacing: .04em; font-weight: 600;
+  }
+
+  /* Provenance tags */
+  .svc-tag {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .04em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .svc-tag.recommended { background: var(--primary-soft); color: var(--primary); }
+  .svc-tag.verified    { background: #e2edf3; color: var(--info); }
+  .svc-tag.sponsored   { background: #f0e6cc; color: #8b6f3e; }
+  .svc-tag.new         { background: var(--accent-soft); color: var(--accent); }
+
+  .svc-desc {
+    margin: 0 0 14px;
+    font-size: 13px; color: var(--ink-2);
+    line-height: 1.5;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .svc-card-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* Star rating display */
+  .svc-rating {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px;
+  }
+  .svc-rating .stars {
+    color: #c2862b; letter-spacing: 1px; font-size: 14px;
+  }
+  .svc-rating .num { font-weight: 600; color: var(--ink); }
+  .svc-rating .ct { color: var(--ink-3); font-size: 12px; }
+  .svc-rating.empty { color: var(--ink-3); font-style: italic; font-size: 12px; }
+
+  /* Empty state */
+  .svc-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 24px;
+    color: var(--ink-3);
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+  .svc-empty .emoji { font-size: 32px; margin-bottom: 10px; }
+  .svc-empty strong { display: block; color: var(--ink); font-size: 14px; margin-bottom: 4px; }
+  .svc-empty p { margin: 0; font-size: 13px; }
+
+  /* Service detail modal */
+  .svc-detail-head {
+    display: flex; gap: 14px; align-items: flex-start;
+    margin-bottom: 14px;
+  }
+  .svc-verified-note {
+    background: #e2edf3; color: var(--info);
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 14px;
+    border-left: 3px solid var(--info);
+  }
+  .svc-detail-desc {
+    margin: 0 0 14px;
+    color: var(--ink-2); font-size: 14px;
+    line-height: 1.55;
+  }
+  .svc-contact-row {
+    display: flex; flex-wrap: wrap; gap: 14px;
+    padding: 12px 14px;
+    background: var(--surface-2);
+    border-radius: 8px;
+    margin-bottom: 14px;
+    font-size: 13px; color: var(--ink-2);
+  }
+  .svc-detail-rating-row {
+    padding: 8px 0 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .svc-detail-reviews { padding: 14px 0; }
+  .svc-detail-reviews-head {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 12px;
+  }
+  .svc-detail-reviews-empty {
+    color: var(--ink-3); font-style: italic; font-size: 13px;
+    padding: 12px 0;
+  }
+  .svc-review {
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+  }
+  .svc-review:first-of-type { border-top: none; }
+  .svc-review-head {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 6px; flex-wrap: wrap;
+  }
+  .svc-review-meta { font-size: 13px; color: var(--ink-2); flex: 1; }
+  .svc-review-meta strong { color: var(--ink); }
+  .svc-review-meta .when { color: var(--ink-3); font-size: 12px; }
+  .svc-review-stars { color: #c2862b; font-size: 13px; letter-spacing: 1px; }
+  .svc-review-text {
+    color: var(--ink-2); font-size: 14px; line-height: 1.5;
+    padding-left: 38px;
+  }
+  .svc-detail-flag {
+    border-top: 1px solid var(--border);
+    padding-top: 14px; margin-top: 4px;
+    text-align: center;
+  }
+  .svc-detail-flag .link-btn {
+    background: transparent; border: none; cursor: pointer;
+    color: var(--ink-3); font-size: 12px; font-family: inherit;
+  }
+  .svc-detail-flag .link-btn:hover { color: var(--accent); text-decoration: underline; }
 
   /* ---------- Rules ---------- */
   .rules-chips {
@@ -1485,7 +1787,7 @@
             <div class="avatar" style="background:linear-gradient(135deg,#2f7a52,#4a9b71)">DR</div>
             <div class="meta">
               <div class="name">Diane Reyes <span class="tag">Board · President</span></div>
-              <div class="sub">Posted 2 hours ago · Pinned</div>
+              <div class="sub">Posted 2 hours ago · Pinned <span class="block-tag">Pine Hollow</span></div>
             </div>
           </div>
           <div class="post-body">
@@ -1516,7 +1818,7 @@
             <div class="avatar" style="background:linear-gradient(135deg,#7a8f6e,#a3b696)">EP</div>
             <div>
               <div class="name">Elena Park · Unit 23 <span class="tag accent">Neighbor poll</span></div>
-              <div class="sub">Started yesterday · closes in 1 week</div>
+              <div class="sub">Started yesterday · closes in 1 week <span class="block-tag">Acorn Lane</span></div>
             </div>
           </div>
           <h3 style="font-size:16px">Anyone interested in a parents-of-toddlers playgroup?</h3>
@@ -1546,7 +1848,7 @@
             <div class="avatar" style="background:linear-gradient(135deg,#a98060,#c9986a)">MK</div>
             <div class="meta">
               <div class="name">Marcus Kim <span class="tag info">Unit 87</span></div>
-              <div class="sub">Posted yesterday in <a href="#">#community</a></div>
+              <div class="sub">Posted yesterday in <a href="#">#community</a> <span class="block-tag">Oak Bend</span></div>
             </div>
           </div>
           <div class="post-body">
@@ -1570,7 +1872,7 @@
             <div class="avatar" style="background:linear-gradient(135deg,#386a8a,#5b8fa8)">JT</div>
             <div class="meta">
               <div class="name">Jordan Tate <span class="tag warn">Maintenance</span></div>
-              <div class="sub">Status update · 6 hours ago</div>
+              <div class="sub">Status update · 6 hours ago <span class="block-tag">Cedar Court</span></div>
             </div>
           </div>
           <div class="post-body">
@@ -1688,7 +1990,7 @@
               <div class="avatar" style="background:linear-gradient(135deg,#a98060,#c9986a)">MK</div>
               <div>
                 <div class="name">Marcus Kim · Unit 87</div>
-                <div class="sub">Started 2 days ago · closes in 5 days</div>
+                <div class="sub">Started 2 days ago · closes in 5 days <span class="block-tag">Oak Bend</span></div>
               </div>
             </div>
             <h3>Best night for a recurring pickleball meetup?</h3>
@@ -1720,7 +2022,7 @@
               <div class="avatar" style="background:linear-gradient(135deg,#7a8f6e,#a3b696)">EP</div>
               <div>
                 <div class="name">Elena Park · Unit 23</div>
-                <div class="sub">Started yesterday · closes in 1 week</div>
+                <div class="sub">Started yesterday · closes in 1 week <span class="block-tag">Acorn Lane</span></div>
               </div>
             </div>
             <h3>Anyone interested in a parents-of-toddlers playgroup?</h3>
@@ -1752,7 +2054,7 @@
               <div class="avatar" style="background:linear-gradient(135deg,#8b6f8f,#a98fad)">JL</div>
               <div>
                 <div class="name">Jamie Lopez · Unit 91</div>
-                <div class="sub">Started 4 days ago · closes tomorrow</div>
+                <div class="sub">Started 4 days ago · closes tomorrow <span class="block-tag">Oak Bend</span></div>
               </div>
             </div>
             <h3>What theme for the summer block party?</h3>
@@ -1871,6 +2173,10 @@
           </div>
           <div class="event-rsvp">
             <div class="attendees"><strong>12</strong> neighbors going</div>
+            <div class="attendees-block-context">
+              <strong>2 from Birch Way:</strong>
+              <span>Talia R., Yuki I.</span>
+            </div>
             <button class="btn sm rsvp-btn ghost" data-event="y1">RSVP</button>
           </div>
         </article>
@@ -1887,6 +2193,10 @@
           </div>
           <div class="event-rsvp">
             <div class="attendees"><strong id="rsvpCount1">34</strong> neighbors going</div>
+            <div class="attendees-block-context">
+              <strong>4 from Birch Way:</strong>
+              <span>Naomi G., Pilar R., Camila B., Henrik O.</span>
+            </div>
             <button class="btn sm rsvp-btn" data-event="1">RSVP</button>
           </div>
         </article>
@@ -1975,47 +2285,91 @@
 
     <!-- ==== AMENITIES SECTION ==== -->
     <div class="section" id="section-amenities">
-      <div class="section-head">
-        <h1>Book an Amenity</h1>
-        <p>Reserve a space for your gathering. First come, first served.</p>
+
+      <div class="amenity-subtabs">
+        <button class="amenity-subtab active" data-amenity-tab="bookable">Bookable amenities</button>
+        <button class="amenity-subtab" data-amenity-tab="services">Local services</button>
       </div>
-      <div class="amenities-grid">
-        <article class="card amenity" onclick="openBooking('Clubhouse')">
-          <div class="amenity-img" style="background:linear-gradient(135deg,#386a8a,#5b8fa8)">
-            <span class="status available">Available today</span>
+
+      <!-- ---- Subtab 1: Bookable ---- -->
+      <div class="amenity-panel active" id="amenity-panel-bookable">
+        <div class="section-head">
+          <h1>Book an Amenity</h1>
+          <p>Reserve a space for your gathering. First come, first served.</p>
+        </div>
+        <div class="amenities-grid">
+          <article class="card amenity" onclick="openBooking('Clubhouse')">
+            <div class="amenity-img" style="background:linear-gradient(135deg,#386a8a,#5b8fa8)">
+              <span class="status available">Available today</span>
+            </div>
+            <div class="amenity-body">
+              <h4>Clubhouse</h4>
+              <div class="sub">Up to 40 people · Kitchen · A/V</div>
+            </div>
+          </article>
+          <article class="card amenity" onclick="openBooking('Pool Cabana')">
+            <div class="amenity-img" style="background:linear-gradient(135deg,#4a9b71,#7ab48f)">
+              <span class="status available">Available today</span>
+            </div>
+            <div class="amenity-body">
+              <h4>Pool Cabana</h4>
+              <div class="sub">Up to 15 people · Shaded · Grill</div>
+            </div>
+          </article>
+          <article class="card amenity" onclick="openBooking('BBQ Patio')">
+            <div class="amenity-img" style="background:linear-gradient(135deg,#d97757,#e09377)">
+              <span class="status busy">Busy this weekend</span>
+            </div>
+            <div class="amenity-body">
+              <h4>BBQ Patio</h4>
+              <div class="sub">Up to 12 people · 2 grills · Picnic tables</div>
+            </div>
+          </article>
+          <article class="card amenity" onclick="openBooking('Tennis Court')">
+            <div class="amenity-img" style="background:linear-gradient(135deg,#a98060,#c9986a)">
+              <span class="status available">Open court</span>
+            </div>
+            <div class="amenity-body">
+              <h4>Tennis Court</h4>
+              <div class="sub">2 courts · Lights until 10pm</div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- ---- Subtab 2: Local services ---- -->
+      <div class="amenity-panel" id="amenity-panel-services">
+        <div class="section-head" style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap">
+          <div>
+            <h1>Local services</h1>
+            <p>Trusted services your neighbors recommend, plus a few sponsored listings — always clearly labeled. Each entry shows where the trust comes from.</p>
           </div>
-          <div class="amenity-body">
-            <h4>Clubhouse</h4>
-            <div class="sub">Up to 40 people · Kitchen · A/V</div>
+          <button class="btn accent" onclick="openRecommendServiceModal()">
+            <svg class="ic" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Recommend a service
+          </button>
+        </div>
+
+        <div class="services-chips" id="servicesChips">
+          <button class="chip active" data-svc-cat="all">All</button>
+          <button class="chip" data-svc-cat="home">🔧 Home services</button>
+          <button class="chip" data-svc-cat="lawn">🌿 Lawn &amp; garden</button>
+          <button class="chip" data-svc-cat="pet">🐾 Pet care</button>
+          <button class="chip" data-svc-cat="cleaning">🧽 Cleaning</button>
+        </div>
+
+        <div class="services-grid" id="servicesGrid">
+          <!-- Filled by JS from LOCAL_SERVICES -->
+        </div>
+
+        <div class="services-foot card" style="padding:14px 18px;margin-top:18px">
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="font-size:22px">💡</div>
+            <div style="font-size:13px;color:var(--ink-2);line-height:1.5">
+              <strong style="color:var(--ink)">How this works:</strong> Most listings get here because neighbors recommend them. A few are sponsored by businesses who pay to be listed — those are always labeled. The board can verify listings they have direct experience with. Anyone can leave a public review or flag a listing for the board to look into.
+            </div>
           </div>
-        </article>
-        <article class="card amenity" onclick="openBooking('Pool Cabana')">
-          <div class="amenity-img" style="background:linear-gradient(135deg,#4a9b71,#7ab48f)">
-            <span class="status available">Available today</span>
-          </div>
-          <div class="amenity-body">
-            <h4>Pool Cabana</h4>
-            <div class="sub">Up to 15 people · Shaded · Grill</div>
-          </div>
-        </article>
-        <article class="card amenity" onclick="openBooking('BBQ Patio')">
-          <div class="amenity-img" style="background:linear-gradient(135deg,#d97757,#e09377)">
-            <span class="status busy">Busy this weekend</span>
-          </div>
-          <div class="amenity-body">
-            <h4>BBQ Patio</h4>
-            <div class="sub">Up to 12 people · 2 grills · Picnic tables</div>
-          </div>
-        </article>
-        <article class="card amenity" onclick="openBooking('Tennis Court')">
-          <div class="amenity-img" style="background:linear-gradient(135deg,#a98060,#c9986a)">
-            <span class="status available">Open court</span>
-          </div>
-          <div class="amenity-body">
-            <h4>Tennis Court</h4>
-            <div class="sub">2 courts · Lights until 10pm</div>
-          </div>
-        </article>
+        </div>
       </div>
     </div>
 
@@ -2399,29 +2753,20 @@
       </div>
     </div>
 
-    <div class="card neighbors">
-      <h3 style="margin:0 0 6px;font-size:14px;font-weight:600">New &amp; active neighbors</h3>
-      <div class="neighbor">
-        <div class="avatar" style="background:#7a8f6e">EP</div>
-        <div class="info">
-          <div class="name">Elena Park</div>
-          <div class="sub">Unit 23 · Moved in last week</div>
-        </div>
-        <span class="badge-mini">NEW</span>
-      </div>
-      <div class="neighbor">
-        <div class="avatar" style="background:#8b6f8f">RP</div>
-        <div class="info">
-          <div class="name">Rohan Patel</div>
-          <div class="sub">Unit 56 · Posted 3 times this week</div>
+    <div class="card neighbors-near" id="neighborsNearCard">
+      <div class="neighbors-near-head">
+        <h3>Neighbors near you</h3>
+        <div class="sub">
+          <span class="block-name">Birch Way</span>
+          <span>·</span>
+          <span>12 households</span>
         </div>
       </div>
-      <div class="neighbor">
-        <div class="avatar" style="background:#a98060">JL</div>
-        <div class="info">
-          <div class="name">Jamie Lopez</div>
-          <div class="sub">Unit 91 · Hosting Saturday party</div>
-        </div>
+      <div class="neighbors-near-list" id="neighborsNearList">
+        <!-- Filled by JS from BIRCH_WAY data -->
+      </div>
+      <div class="neighbors-near-foot">
+        <button class="link-btn" onclick="showToast('Block-wide directory coming soon')">See full block →</button>
       </div>
     </div>
 
@@ -3191,6 +3536,75 @@
   </div>
 </div>
 
+<!-- ============ SERVICE DETAIL MODAL ============ -->
+<div class="modal-backdrop" id="svcDetailModal">
+  <div class="modal" style="max-width:560px">
+    <div class="modal-head">
+      <h3>Local service</h3>
+      <button class="close-btn" onclick="closeModal('svcDetailModal')">×</button>
+    </div>
+    <div class="modal-body" id="svcDetailBody">
+      <!-- Filled by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ============ RECOMMEND A SERVICE MODAL ============ -->
+<div class="modal-backdrop" id="recommendServiceModal">
+  <div class="modal" style="max-width:500px">
+    <div class="modal-head">
+      <h3>Recommend a service</h3>
+      <button class="close-btn" onclick="closeModal('recommendServiceModal')">×</button>
+    </div>
+    <div class="modal-body">
+      <p style="margin:0 0 16px;font-size:13px;color:var(--ink-2)">Tell us about a business you'd recommend to your neighbors. The board will review and add it to the directory if appropriate — usually within a week.</p>
+      <div class="admin-field">
+        <label>Business name</label>
+        <input type="text" id="recSvcName" placeholder="e.g., Cardinal Plumbing Co.">
+      </div>
+      <div class="admin-field">
+        <label>Category</label>
+        <select id="recSvcCategory">
+          <option value="home">🔧 Home services</option>
+          <option value="lawn">🌿 Lawn &amp; garden</option>
+          <option value="pet">🐾 Pet care</option>
+          <option value="cleaning">🧽 Cleaning</option>
+        </select>
+      </div>
+      <div class="admin-field">
+        <label>Why are you recommending them?</label>
+        <textarea id="recSvcWhy" rows="4" placeholder="A few sentences on what they did, what you liked, anything other neighbors should know."></textarea>
+      </div>
+      <div class="admin-field">
+        <label>Phone or website (optional)</label>
+        <input type="text" id="recSvcContact" placeholder="(555) 123-4567 or example.com">
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn ghost" onclick="closeModal('recommendServiceModal')">Cancel</button>
+      <button class="btn" onclick="submitRecommendation()">Send to board</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HOUSEHOLD DETAIL MODAL ============ -->
+<div class="modal-backdrop" id="householdDetailModal">
+  <div class="modal" style="max-width:460px">
+    <div class="modal-head">
+      <h3 id="householdDetailTitle">Your neighbor</h3>
+      <button class="close-btn" onclick="closeModal('householdDetailModal')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="household-detail-head" id="householdDetailHead"></div>
+      <div class="household-detail-rows" id="householdDetailRows"></div>
+      <div class="household-detail-foot">
+        <button class="btn ghost sm" onclick="closeModal('householdDetailModal')">Close</button>
+        <button class="btn sm" id="householdSayHiBtn" onclick="sayHiToNeighbor()">👋 Say hi</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ============ TOAST ============ -->
 <div class="toast" id="toast"><div class="ok">✓</div><span id="toastMsg">Done</span></div>
 
@@ -3772,6 +4186,466 @@
   });
 
   // ============================================================
+  // BLOCKS — community geography
+  // ============================================================
+  // Maple Grove's 142 units are grouped into named blocks. Each block is ~12-30
+  // households, sized so residents can plausibly know everyone on their block.
+  // Block info is the opt-out privacy tier — visible to other residents by default.
+
+  const BLOCK_NAMES = {
+    acorn: 'Acorn Lane',
+    maple: 'Maple Lane',
+    oak:   'Oak Bend',
+    pine:  'Pine Hollow',
+    birch: 'Birch Way',
+    cedar: 'Cedar Court',
+    elm:   'Elm Ridge'
+  };
+
+  function unitToBlock(unitNum) {
+    const n = parseInt(String(unitNum).replace(/[^0-9]/g, ''), 10);
+    if (isNaN(n)) return null;
+    if (n <= 29)  return 'acorn';
+    if (n <= 59)  return 'maple';
+    if (n <= 99)  return 'oak';
+    if (n <= 129) return 'pine';
+    if (n <= 149) return 'birch';
+    if (n <= 179) return 'cedar';
+    return 'elm';
+  }
+
+  function blockLabel(unitNum) {
+    const k = unitToBlock(unitNum);
+    return k ? BLOCK_NAMES[k] : '';
+  }
+
+  // Sarah lives on Birch Way (Unit 142). These are her 11 block neighbors.
+  // Each entry mirrors what the platform stores per resident, with the privacy
+  // tier baked in: name (first + last initial), unit, and block are always visible;
+  // photoColor, tenure, hook, and family are opt-in.
+  const BIRCH_WAY = [
+    { unit: '130', name: 'Henrik O.',        household: 'Henrik Olsen',                photoColor: '#6f8a7e', tenure: 'Owner since 2018',       hook: 'Walks his dog at 7am most mornings',                family: null },
+    { unit: '132', name: 'Maya H.',          household: 'The Hayes family',            photoColor: '#b88a5a', tenure: 'Renter · since 2024',    hook: null,                                                  family: 'Family of 4' },
+    { unit: '134', name: 'Erik I.',          household: 'Erik Iversen',                photoColor: null,      tenure: null,                     hook: null,                                                  family: null },
+    { unit: '135', name: 'Talia & Roman R.', household: 'Talia & Roman Reyes',         photoColor: '#8a6f9b', tenure: 'Owner since 2022',       hook: null,                                                  family: null },
+    { unit: '137', name: 'Camila B.',        household: 'The Becerra family',          photoColor: '#7a8d9b', tenure: 'Owner since 2021',       hook: 'Big garden — happy to swap clippings',                family: 'Family of 3' },
+    { unit: '139', name: 'Wes B.',           household: 'Wes Brooks',                  photoColor: '#9b7a8a', tenure: null,                     hook: 'Runs the Tuesday morning loop · always wants buddies', family: null },
+    { unit: '140', name: 'Yuki I.',          household: 'Yuki Iverson',                photoColor: '#5e8a7e', tenure: 'Owner since 2019',       hook: null,                                                  family: null },
+    // Unit 142 — Sarah Chen (you) — excluded from the widget
+    { unit: '144', name: 'Naomi G.',         household: 'The Goldstein family',        photoColor: '#a98060', tenure: 'Owner since 2015',       hook: 'Hosts a pool day every July 4',                       family: 'Family of 4' },
+    { unit: '146', name: 'Theo & Ruth K.',   household: 'Theo & Ruth Karim-Patterson', photoColor: '#7d6b9b', tenure: 'Owner since 2020',       hook: null,                                                  family: null },
+    { unit: '148', name: 'Dani F.',          household: 'Dani Foster',                 photoColor: null,      tenure: 'Renter · since Feb 2026', hook: null,                                                 family: null },
+    { unit: '149', name: 'Pilar R.',         household: 'The Ramos family',            photoColor: '#b18a6a', tenure: 'Owner since 2017',       hook: 'Spanish-language book club starting in June',         family: 'Family of 3' }
+  ];
+
+  function initials(name) {
+    return name.split(/\s+/)
+      .filter(p => p && !['&', 'the'].includes(p.toLowerCase()))
+      .slice(0, 2)
+      .map(p => p[0])
+      .join('')
+      .toUpperCase();
+  }
+
+  function avatarHtml(name, photoColor, sizeStyle) {
+    const inits = initials(name);
+    const style = sizeStyle ? ` style="${sizeStyle}${photoColor ? `;background:${photoColor}` : ''}"` :
+                  (photoColor ? ` style="background:${photoColor}"` : '');
+    const cls = 'avatar' + (photoColor ? '' : ' privacy-min');
+    return `<div class="${cls}"${style}>${inits}</div>`;
+  }
+
+  // ---------- Neighbors near you (Birch Way widget) ----------
+  let currentHouseholdUnit = null;
+
+  function renderNeighborsNear() {
+    const list = document.getElementById('neighborsNearList');
+    if (!list) return;
+    list.innerHTML = '';
+    BIRCH_WAY.forEach(h => {
+      const item = document.createElement('button');
+      item.className = 'neighbor-near';
+      item.dataset.unit = h.unit;
+      item.innerHTML = `
+        ${avatarHtml(h.name, h.photoColor)}
+        <div class="info">
+          <div class="name">${escapeHtml(h.name)}</div>
+          <div class="meta">Unit ${escapeHtml(h.unit)}</div>
+          ${h.hook ? `<div class="hook">${escapeHtml(h.hook)}</div>` : ''}
+        </div>
+      `;
+      item.addEventListener('click', () => openHouseholdDetail(h.unit));
+      list.appendChild(item);
+    });
+  }
+
+  function openHouseholdDetail(unit) {
+    const h = BIRCH_WAY.find(r => r.unit === unit);
+    if (!h) return;
+    currentHouseholdUnit = unit;
+
+    const head = document.getElementById('householdDetailHead');
+    head.innerHTML = `
+      ${avatarHtml(h.name, h.photoColor, 'width:56px;height:56px;font-size:20px')}
+      <div>
+        <div class="name">${escapeHtml(h.name)}</div>
+        <div class="meta">Unit ${escapeHtml(h.unit)} · <span style="color:var(--primary);font-weight:600">Birch Way</span></div>
+      </div>
+    `;
+
+    const rows = [];
+    if (h.tenure) rows.push({ icon: '🏠', label: 'In the neighborhood', text: h.tenure });
+    if (h.family) rows.push({ icon: '👪', label: 'Household', text: h.family });
+    if (h.hook)   rows.push({ icon: '💬', label: 'A little about them', text: h.hook });
+
+    const rowsContainer = document.getElementById('householdDetailRows');
+    if (rows.length === 0) {
+      rowsContainer.innerHTML = `
+        <div class="household-detail-empty">
+          ${escapeHtml(h.name)} hasn't shared more yet. On Maple Grove, names and units are visible to other residents by default — anything else is opt-in.
+        </div>
+      `;
+    } else {
+      rowsContainer.innerHTML = rows.map(r => `
+        <div class="household-detail-row">
+          <div class="icon-cell">${r.icon}</div>
+          <div class="text">
+            <div class="lbl">${r.label}</div>
+            <div>${escapeHtml(r.text)}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    document.getElementById('householdDetailModal').classList.add('show');
+  }
+
+  function sayHiToNeighbor() {
+    const h = BIRCH_WAY.find(r => r.unit === currentHouseholdUnit);
+    if (!h) return;
+    closeModal('householdDetailModal');
+    showToast(`Said hi to ${h.name} — they'll see your wave next time they open the app`);
+  }
+
+  // ============================================================
+  // LOCAL SERVICES — community-recommended + sponsored directory
+  // ============================================================
+  // Three trust tiers, always labeled:
+  //   - 'recommended': peer-driven, listed because N+ neighbors recommended
+  //   - 'verified':    board has direct experience, signed off
+  //   - 'sponsored':   business pays for placement, labeled as such
+  //   - 'new':         recently submitted, fewer than 5 recommendations
+  // Sponsored listings are ALWAYS clearly marked and can still receive reviews.
+
+  const SVC_CATEGORIES = {
+    home:     { icon: '🔧', name: 'Home services',  color: '#386a8a' },
+    lawn:     { icon: '🌿', name: 'Lawn & garden',   color: '#4a9b71' },
+    pet:      { icon: '🐾', name: 'Pet care',        color: '#a98060' },
+    cleaning: { icon: '🧽', name: 'Cleaning',        color: '#7d6b9b' }
+  };
+
+  const LOCAL_SERVICES = [
+    {
+      id: 'biz1', name: 'Cardinal Plumbing Co.', category: 'home',
+      provenance: 'recommended', recommendCount: 14,
+      rating: 4.8, reviewCount: 23,
+      description: 'Family-owned plumbing for residential repairs and remodels. Fair pricing, no upsell pressure, will come out same-day for emergencies.',
+      contact: { phone: '(555) 234-9871', website: 'cardinalplumbing.local' },
+      reviews: [
+        { author: 'Marcus K.', block: 'Oak Bend',   text: 'Fixed our water heater on a Sunday. Fair price, no upsell.',                       rating: 5, when: '2 weeks ago' },
+        { author: 'Pilar R.',  block: 'Birch Way',  text: 'Reliable for the small stuff. Booked a week out for a non-emergency, fine.',     rating: 4, when: '1 month ago' },
+        { author: 'Diane R.',  block: 'Pine Hollow', text: 'Used them at my place and at my mother\'s — both jobs solid. Highly recommend.', rating: 5, when: '2 months ago' }
+      ]
+    },
+    {
+      id: 'biz2', name: 'Tate Brothers Electric', category: 'home',
+      provenance: 'verified', verifiedNote: 'Board has used them for clubhouse upgrades since 2023.',
+      rating: 4.9, reviewCount: 17,
+      description: 'Licensed electricians, residential and commercial. The board contracted them for the clubhouse rewiring and pool lighting projects.',
+      contact: { phone: '(555) 612-4080', website: 'tatebrothers.com' },
+      reviews: [
+        { author: 'Jamie L.', block: 'Oak Bend',   text: 'Came out for a panel inspection. Thorough, clear on what was urgent vs. nice-to-have.', rating: 5, when: '3 weeks ago' },
+        { author: 'Naomi G.', block: 'Birch Way',  text: 'Installed our EV outlet cleanly. A little pricey but worth it.',                          rating: 4, when: '1 month ago' }
+      ]
+    },
+    {
+      id: 'biz3', name: 'Northside HVAC', category: 'home',
+      provenance: 'sponsored',
+      rating: 4.2, reviewCount: 9,
+      description: 'Heating and cooling installation, repair, and seasonal tune-ups. 24-hour emergency service. Maple Grove residents get 10% off first service.',
+      contact: { phone: '(555) 789-3300', website: 'northsidehvac.com' },
+      reviews: [
+        { author: 'Camila B.', block: 'Birch Way',  text: 'Quick to respond, finished the job in one visit. Pricing felt average for the area.',  rating: 4, when: '2 weeks ago' },
+        { author: 'Wes B.',    block: 'Birch Way',  text: 'Solid technicians. The 10% discount made up for the slightly higher base rate.',       rating: 4, when: '1 month ago' }
+      ]
+    },
+    {
+      id: 'biz4', name: 'Handy Hank — Local Handyman', category: 'home',
+      provenance: 'recommended', recommendCount: 18,
+      rating: 4.9, reviewCount: 31,
+      description: 'Hank is the neighborhood handyman — small repairs, hanging pictures, mounting TVs, fixing squeaky doors, you name it. Cash or Venmo, by-the-hour.',
+      contact: { phone: '(555) 311-0042', website: null },
+      reviews: [
+        { author: 'Yuki I.',     block: 'Birch Way',  text: 'Mounted three TVs and reframed a door in a single afternoon. Hank is a treasure.',  rating: 5, when: '1 week ago' },
+        { author: 'Theo K.',     block: 'Birch Way',  text: 'Quick, friendly, fair price. We text him for everything now.',                        rating: 5, when: '3 weeks ago' },
+        { author: 'Rohan P.',    block: 'Oak Bend',   text: 'Did some baby-proofing work for us — careful with the kids, respectful of the house.', rating: 5, when: '2 months ago' }
+      ]
+    },
+    {
+      id: 'biz5', name: 'Verde Lawn Co.', category: 'lawn',
+      provenance: 'verified', verifiedNote: 'The HOA contracts Verde for common-area landscaping.',
+      rating: 4.7, reviewCount: 14,
+      description: 'The same crew that maintains the Maple Grove common areas. Available for private yards: mowing, edging, mulch, seasonal cleanups, landscape design.',
+      contact: { phone: '(555) 882-1100', website: 'verdelawn.com' },
+      reviews: [
+        { author: 'Henrik O.', block: 'Birch Way',  text: 'Solid weekly mow service. They already know the neighborhood, so it\'s easy to coordinate.', rating: 5, when: '1 month ago' }
+      ]
+    },
+    {
+      id: 'biz6', name: 'Mossbrook Tree Service', category: 'lawn',
+      provenance: 'recommended', recommendCount: 9,
+      rating: 4.6, reviewCount: 11,
+      description: 'Certified arborists for tree pruning, removal, and stump grinding. Fully insured, will pull permits when required.',
+      contact: { phone: '(555) 446-7720', website: 'mossbrooktree.com' },
+      reviews: [
+        { author: 'Patricia H.', block: 'Pine Hollow', text: 'Took down a dead oak without touching the fence or the neighbor\'s shed. Clean work.', rating: 5, when: '2 weeks ago' },
+        { author: 'Elena P.',    block: 'Acorn Lane',  text: 'Estimate came in higher than I hoped but the job was excellent.',                       rating: 4, when: '1 month ago' }
+      ]
+    },
+    {
+      id: 'biz7', name: 'Pawsitively Perfect Pet Sitting', category: 'pet',
+      provenance: 'recommended', recommendCount: 6,
+      rating: 5.0, reviewCount: 8,
+      description: 'Drop-in visits, overnight stays, dog walks. Bonded and insured. Will send photos. Familiar with the Maple Grove gate codes.',
+      contact: { phone: '(555) 220-5544', website: 'pawsitivelyperfect.com' },
+      reviews: [
+        { author: 'Talia R.', block: 'Birch Way',  text: 'Watched our cats for 10 days while we traveled. Daily photos, came back to happy pets.',  rating: 5, when: '3 weeks ago' },
+        { author: 'Jamie L.', block: 'Oak Bend',   text: 'Best pet sitter we\'ve had. Already booked her for the holidays.',                        rating: 5, when: '1 month ago' }
+      ]
+    },
+    {
+      id: 'biz8', name: 'Whisker Wagon Mobile Grooming', category: 'pet',
+      provenance: 'sponsored',
+      rating: 4.3, reviewCount: 6,
+      description: 'Mobile pet grooming — the van comes to your driveway. Dogs and cats, all sizes. Bring-a-neighbor discount: 15% off when you both book the same day.',
+      contact: { phone: '(555) 901-3388', website: 'whiskerwagon.com' },
+      reviews: [
+        { author: 'Maya H.',   block: 'Birch Way',  text: 'Convenient — no more dog-in-car stress. Pricing is fair for what you get.',  rating: 4, when: '2 weeks ago' },
+        { author: 'Devon P.',  block: 'Cedar Court', text: 'My old golden won\'t go in the car anymore so this saved us. Recommended.',   rating: 5, when: '1 month ago' }
+      ]
+    },
+    {
+      id: 'biz9', name: 'MapleClean Housekeeping', category: 'cleaning',
+      provenance: 'recommended', recommendCount: 11,
+      rating: 4.8, reviewCount: 19,
+      description: 'Weekly, bi-weekly, or one-time deep cleans. Locally owned, consistent crew. Eco-friendly products on request.',
+      contact: { phone: '(555) 414-9966', website: 'mapleclean.co' },
+      reviews: [
+        { author: 'Camila B.',  block: 'Birch Way',  text: 'Same team every visit, never had an issue. Worth every penny.',  rating: 5, when: '1 week ago' },
+        { author: 'Naomi G.',   block: 'Birch Way',  text: 'Deep clean before we hosted Thanksgiving — house was spotless.',  rating: 5, when: '4 months ago' }
+      ]
+    },
+    {
+      id: 'biz10', name: 'Sparkle & Shine Window Cleaning', category: 'cleaning',
+      provenance: 'new', recommendCount: 3,
+      rating: null, reviewCount: 0,
+      description: 'Interior and exterior window cleaning, screen cleaning, light gutter work. New to Maple Grove — recently recommended by three Pine Hollow residents.',
+      contact: { phone: '(555) 778-2034', website: null },
+      reviews: []
+    }
+  ];
+
+  let svcFilter = 'all';
+
+  function setSvcFilter(cat) {
+    svcFilter = cat;
+    document.querySelectorAll('#servicesChips .chip').forEach(c => {
+      c.classList.toggle('active', c.dataset.svcCat === cat);
+    });
+    renderServices();
+  }
+
+  function provenanceTag(svc) {
+    if (svc.provenance === 'verified') {
+      return `<span class="svc-tag verified">✓ Verified by the board</span>`;
+    }
+    if (svc.provenance === 'sponsored') {
+      return `<span class="svc-tag sponsored">Sponsored</span>`;
+    }
+    if (svc.provenance === 'new') {
+      return `<span class="svc-tag new">New · ${svc.recommendCount || 0} recommendations</span>`;
+    }
+    return `<span class="svc-tag recommended">Recommended by ${svc.recommendCount} neighbors</span>`;
+  }
+
+  function starRating(rating, count) {
+    if (rating == null) return `<span class="svc-rating empty">No reviews yet</span>`;
+    const full = Math.floor(rating);
+    const half = rating - full >= 0.5;
+    let stars = '';
+    for (let i = 0; i < full; i++) stars += '★';
+    if (half) stars += '⯨'; // approximate half-star
+    for (let i = full + (half ? 1 : 0); i < 5; i++) stars += '☆';
+    return `<span class="svc-rating"><span class="stars">${stars}</span><span class="num">${rating.toFixed(1)}</span><span class="ct">(${count})</span></span>`;
+  }
+
+  function renderServices() {
+    const grid = document.getElementById('servicesGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    // Sort: verified first, then recommended (by count desc), then sponsored, then new
+    const order = { verified: 0, recommended: 1, sponsored: 2, new: 3 };
+    const filtered = LOCAL_SERVICES.filter(s => svcFilter === 'all' || s.category === svcFilter);
+    filtered.sort((a, b) => {
+      const ra = order[a.provenance] ?? 4;
+      const rb = order[b.provenance] ?? 4;
+      if (ra !== rb) return ra - rb;
+      return (b.recommendCount || 0) - (a.recommendCount || 0);
+    });
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `
+        <div class="svc-empty">
+          <div class="emoji">🔎</div>
+          <strong>No services in this category yet</strong>
+          <p>Know a great one? Recommend it and we'll get it in front of the board.</p>
+        </div>`;
+      return;
+    }
+
+    filtered.forEach(svc => {
+      const cat = SVC_CATEGORIES[svc.category] || { icon: '📋', name: 'Service' };
+      const card = document.createElement('article');
+      card.className = 'svc-card' + (svc.provenance === 'sponsored' ? ' sponsored' : '');
+      card.dataset.svcId = svc.id;
+      card.innerHTML = `
+        <div class="svc-card-head">
+          <div class="svc-icon" style="background:${cat.color}">${cat.icon}</div>
+          <div class="svc-meta">
+            <h4>${escapeHtml(svc.name)}</h4>
+            <div class="svc-cat">${escapeHtml(cat.name)}</div>
+          </div>
+          ${provenanceTag(svc)}
+        </div>
+        <p class="svc-desc">${escapeHtml(svc.description)}</p>
+        <div class="svc-card-foot">
+          ${starRating(svc.rating, svc.reviewCount)}
+          <button class="btn ghost sm svc-details-btn" data-svc-id="${svc.id}">Details &amp; reviews →</button>
+        </div>
+      `;
+      card.querySelector('.svc-details-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        openServiceDetail(svc.id);
+      });
+      card.addEventListener('click', () => openServiceDetail(svc.id));
+      grid.appendChild(card);
+    });
+  }
+
+  // ---------- Business detail modal ----------
+  let currentSvcId = null;
+
+  function openServiceDetail(svcId) {
+    const svc = LOCAL_SERVICES.find(s => s.id === svcId);
+    if (!svc) return;
+    currentSvcId = svcId;
+    const cat = SVC_CATEGORIES[svc.category] || { icon: '📋', name: 'Service', color: '#888' };
+
+    const body = document.getElementById('svcDetailBody');
+    const reviewsHtml = svc.reviews.length === 0
+      ? `<div class="svc-detail-reviews-empty">No reviews yet. Be the first to write one.</div>`
+      : svc.reviews.map(r => `
+          <div class="svc-review">
+            <div class="svc-review-head">
+              <div class="avatar privacy-min" style="width:30px;height:30px;font-size:11px">${initials(r.author)}</div>
+              <div class="svc-review-meta">
+                <strong>${escapeHtml(r.author)}</strong>
+                <span class="block-tag">${escapeHtml(r.block)}</span>
+                <span class="when">· ${escapeHtml(r.when)}</span>
+              </div>
+              <div class="svc-review-stars">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</div>
+            </div>
+            <div class="svc-review-text">${escapeHtml(r.text)}</div>
+          </div>
+        `).join('');
+
+    body.innerHTML = `
+      <div class="svc-detail-head">
+        <div class="svc-icon" style="background:${cat.color};width:50px;height:50px;font-size:24px">${cat.icon}</div>
+        <div>
+          <h3 style="margin:0 0 4px;font-size:18px;font-weight:600">${escapeHtml(svc.name)}</h3>
+          <div style="font-size:13px;color:var(--ink-3)">${escapeHtml(cat.name)}</div>
+        </div>
+        <div style="margin-left:auto">${provenanceTag(svc)}</div>
+      </div>
+      ${svc.verifiedNote ? `<div class="svc-verified-note">${escapeHtml(svc.verifiedNote)}</div>` : ''}
+      <p class="svc-detail-desc">${escapeHtml(svc.description)}</p>
+      <div class="svc-contact-row">
+        ${svc.contact.phone ? `<div class="svc-contact-item">📞 ${escapeHtml(svc.contact.phone)}</div>` : ''}
+        ${svc.contact.website ? `<div class="svc-contact-item">🔗 ${escapeHtml(svc.contact.website)}</div>` : ''}
+      </div>
+      <div class="svc-detail-rating-row">
+        ${starRating(svc.rating, svc.reviewCount)}
+      </div>
+      <div class="svc-detail-reviews">
+        <div class="svc-detail-reviews-head">
+          <strong>Reviews</strong>
+          <button class="btn sm" onclick="writeReviewFor('${svc.id}')">+ Write a review</button>
+        </div>
+        ${reviewsHtml}
+      </div>
+      <div class="svc-detail-flag">
+        <button class="link-btn" onclick="flagService('${svc.id}')">⚑ Flag this listing for the board to review</button>
+      </div>
+    `;
+
+    document.getElementById('svcDetailModal').classList.add('show');
+  }
+
+  function writeReviewFor(svcId) {
+    const svc = LOCAL_SERVICES.find(s => s.id === svcId);
+    if (!svc) return;
+    showToast(`Review for ${svc.name} — coming next pass. We'll add the form here.`);
+  }
+
+  function flagService(svcId) {
+    const svc = LOCAL_SERVICES.find(s => s.id === svcId);
+    if (!svc) return;
+    closeModal('svcDetailModal');
+    showToast(`Flagged ${svc.name} for board review. Your note stays private.`);
+  }
+
+  // ---------- Recommend a service ----------
+  function openRecommendServiceModal() {
+    document.getElementById('recSvcName').value = '';
+    document.getElementById('recSvcCategory').value = 'home';
+    document.getElementById('recSvcWhy').value = '';
+    document.getElementById('recSvcContact').value = '';
+    document.getElementById('recommendServiceModal').classList.add('show');
+  }
+
+  function submitRecommendation() {
+    const name = document.getElementById('recSvcName').value.trim();
+    const why = document.getElementById('recSvcWhy').value.trim();
+    if (!name || !why) {
+      showToast('Add a business name and a short reason you recommend them');
+      return;
+    }
+    closeModal('recommendServiceModal');
+    showToast(`Sent to the board — ${name} should appear in the directory within a week if approved`);
+  }
+
+  // ---------- Amenity sub-tab switching ----------
+  function showAmenityTab(name) {
+    document.querySelectorAll('.amenity-subtab').forEach(t => {
+      t.classList.toggle('active', t.dataset.amenityTab === name);
+    });
+    document.querySelectorAll('.amenity-panel').forEach(p => {
+      p.classList.toggle('active', p.id === 'amenity-panel-' + name);
+    });
+  }
+
+  // ============================================================
   // RULES — shared registry with two-way sync to resident view
   // ============================================================
 
@@ -4332,9 +5206,21 @@
     chip.addEventListener('click', () => setModFilter(chip.dataset.modFilter));
   });
 
+  // ---------- Amenity sub-tab clicks ----------
+  document.querySelectorAll('.amenity-subtab').forEach(tab => {
+    tab.addEventListener('click', () => showAmenityTab(tab.dataset.amenityTab));
+  });
+
+  // ---------- Service category filter chips ----------
+  document.querySelectorAll('#servicesChips .chip').forEach(chip => {
+    chip.addEventListener('click', () => setSvcFilter(chip.dataset.svcCat));
+  });
+
   // ---------- Init admin data ----------
   initRulesRegistry();
   renderModerationQueues();
+  renderNeighborsNear();
+  renderServices();
   // Tag the existing resident-side "Recent submissions" with concern IDs so they sync correctly
   (function tagSeedSubmissions() {
     const list = document.querySelector('#section-rules .activity-list');
