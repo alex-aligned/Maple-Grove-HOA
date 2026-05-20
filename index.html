@@ -1582,6 +1582,399 @@
     .admin-sidebar-foot { width: 100%; padding-top: 8px; }
     .admin-main { padding: 18px; }
   }
+
+  /* ============================================================
+     ONBOARDING VIEW — Common Ground platform setup
+     Activated when <body> has class .onboarding-mode
+     ============================================================ */
+
+  body.onboarding-mode .topbar { display: none; }
+  body.onboarding-mode main.page { display: none; }
+  .onboarding-shell { display: none; }
+  body.onboarding-mode .onboarding-shell {
+    display: block;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #faf6ec 0%, var(--bg) 100%);
+  }
+
+  /* Shared header across onboarding screens */
+  .ob-header {
+    padding: 22px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .ob-brand {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .ob-brand-mark {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: linear-gradient(135deg, #2f7a52, #4a9b71);
+    display: grid; place-items: center;
+    color: white; font-weight: 700; font-size: 14px;
+  }
+  .ob-brand-text {
+    font-weight: 600; font-size: 16px; letter-spacing: -.01em;
+    color: var(--ink);
+  }
+  .ob-brand-text .platform-sub {
+    display: block; font-size: 11px; color: var(--ink-3); font-weight: 500;
+    margin-top: -2px;
+  }
+  .ob-header-actions { display: flex; gap: 8px; align-items: center; }
+  .ob-header-actions .ob-step-marker {
+    font-size: 12px; color: var(--ink-3); font-weight: 500;
+  }
+  .ob-exit-btn {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--ink-2); font-family: inherit; font-size: 13px;
+    padding: 6px 12px; border-radius: 8px; cursor: pointer;
+  }
+  .ob-exit-btn:hover { background: var(--surface-2); color: var(--ink); }
+
+  /* Onboarding screens (each = one body) */
+  .ob-screen { display: none; padding: 48px 32px 80px; }
+  .ob-screen.active { display: block; }
+  .ob-container {
+    max-width: 720px; margin: 0 auto;
+  }
+  .ob-container.wide { max-width: 960px; }
+
+  /* Landing */
+  .ob-landing .ob-container {
+    text-align: center; padding-top: 48px;
+  }
+  .ob-landing h1 {
+    font-size: 42px; line-height: 1.1; letter-spacing: -.02em;
+    margin: 0 0 18px; color: var(--ink); font-weight: 600;
+  }
+  .ob-landing .lede {
+    font-size: 18px; color: var(--ink-2); margin: 0 auto 32px;
+    line-height: 1.5; max-width: 560px;
+  }
+  .ob-landing .cta-row {
+    display: flex; gap: 12px; justify-content: center; align-items: center;
+    margin-bottom: 56px;
+  }
+  .ob-landing .cta-row .btn { padding: 14px 26px; font-size: 15px; }
+  .ob-landing .pitch-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+    margin-top: 12px;
+  }
+  .ob-landing .pitch {
+    text-align: left;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .ob-landing .pitch .emoji { font-size: 26px; margin-bottom: 8px; }
+  .ob-landing .pitch h3 {
+    margin: 0 0 6px; font-size: 15px; font-weight: 600; color: var(--ink);
+  }
+  .ob-landing .pitch p {
+    margin: 0; font-size: 13px; color: var(--ink-2); line-height: 1.5;
+  }
+  @media (max-width: 720px) {
+    .ob-landing .pitch-grid { grid-template-columns: 1fr; }
+    .ob-landing h1 { font-size: 32px; }
+  }
+
+  /* Form screens (steps 1 + 2) */
+  .ob-form-screen .ob-container { max-width: 560px; }
+  .ob-step-label {
+    font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .08em;
+    color: var(--primary); margin-bottom: 8px;
+  }
+  .ob-screen h2 {
+    margin: 0 0 8px; font-size: 28px; font-weight: 600;
+    color: var(--ink); letter-spacing: -.015em;
+  }
+  .ob-screen .lede {
+    font-size: 15px; color: var(--ink-2); margin: 0 0 28px; line-height: 1.5;
+  }
+  .ob-form {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 26px;
+  }
+  .ob-field { margin-bottom: 18px; }
+  .ob-field:last-child { margin-bottom: 0; }
+  .ob-field label {
+    display: block; font-size: 13px; font-weight: 600; color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .ob-field .hint {
+    display: block; font-size: 12px; color: var(--ink-3); margin-bottom: 8px;
+  }
+  .ob-field input[type="text"],
+  .ob-field input[type="email"],
+  .ob-field input[type="number"],
+  .ob-field select,
+  .ob-field textarea {
+    width: 100%; padding: 11px 14px;
+    border: 1px solid var(--border); border-radius: 8px;
+    font-size: 14px; font-family: inherit;
+    background: var(--surface); color: var(--ink);
+  }
+  .ob-field input:focus, .ob-field select:focus, .ob-field textarea:focus {
+    outline: none; border-color: var(--primary);
+  }
+  .ob-field-row {
+    display: grid; grid-template-columns: 2fr 1fr; gap: 12px;
+  }
+  .ob-form-foot {
+    display: flex; justify-content: space-between; gap: 12px;
+    margin-top: 22px;
+  }
+  .ob-form-foot .btn { padding: 12px 22px; font-size: 14px; }
+
+  /* Setup hub */
+  .ob-hub .ob-container { max-width: 920px; }
+  .ob-hub-head {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 20px; flex-wrap: wrap; margin-bottom: 28px;
+  }
+  .ob-hub-head h2 { margin: 0 0 6px; }
+  .ob-hub-head p { margin: 0; color: var(--ink-2); font-size: 14px; }
+  .ob-progress-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px; border-radius: 999px;
+    background: var(--primary-soft); color: var(--primary);
+    font-size: 12px; font-weight: 600;
+  }
+  .ob-hub-grid {
+    display: grid; grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 20px;
+  }
+  @media (max-width: 880px) {
+    .ob-hub-grid { grid-template-columns: 1fr; }
+  }
+
+  .ob-task-cards {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
+  }
+  @media (max-width: 720px) {
+    .ob-task-cards { grid-template-columns: 1fr; }
+  }
+  .ob-task-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    cursor: pointer;
+    transition: border-color .15s, box-shadow .15s, transform .15s;
+    display: flex; flex-direction: column;
+    text-align: left;
+    font-family: inherit;
+    color: var(--ink);
+  }
+  .ob-task-card:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .ob-task-card.done {
+    background: linear-gradient(180deg, #f1f8f3 0%, var(--surface) 100%);
+    border-color: var(--primary-soft);
+  }
+  .ob-task-card .task-head {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+  }
+  .ob-task-card .task-emoji { font-size: 26px; }
+  .ob-task-card .task-status {
+    margin-left: auto;
+    font-size: 11px; font-weight: 700;
+    padding: 3px 8px; border-radius: 999px;
+    background: var(--surface-2); color: var(--ink-3);
+    text-transform: uppercase; letter-spacing: .04em;
+  }
+  .ob-task-card.done .task-status {
+    background: var(--primary-soft); color: var(--primary);
+  }
+  .ob-task-card h3 {
+    margin: 0 0 6px; font-size: 16px; font-weight: 600;
+  }
+  .ob-task-card p {
+    margin: 0; font-size: 13px; color: var(--ink-2); line-height: 1.5;
+    flex: 1;
+  }
+  .ob-task-card .summary {
+    margin-top: 12px; padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--ink-3);
+  }
+
+  .ob-checklist-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    height: fit-content;
+    position: sticky; top: 100px;
+  }
+  .ob-checklist-card h4 {
+    margin: 0 0 4px; font-size: 14px; font-weight: 600;
+  }
+  .ob-checklist-card .progress {
+    font-size: 12px; color: var(--ink-3); margin-bottom: 16px;
+  }
+  .ob-checklist-bar {
+    height: 6px; background: var(--surface-2);
+    border-radius: 999px; overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .ob-checklist-bar span {
+    display: block; height: 100%; background: var(--primary);
+    border-radius: 999px; transition: width .3s;
+  }
+  .ob-checklist {
+    display: flex; flex-direction: column; gap: 10px;
+    margin-bottom: 18px;
+  }
+  .ob-checklist-item {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; color: var(--ink-2);
+  }
+  .ob-checklist-item .checkbox {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 1.5px solid var(--ink-3);
+    display: grid; place-items: center;
+    color: transparent; font-size: 11px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .ob-checklist-item.done .checkbox {
+    background: var(--primary); border-color: var(--primary); color: white;
+  }
+  .ob-checklist-item.done .text { color: var(--ink-3); text-decoration: line-through; }
+  .ob-checklist-card .finish-btn {
+    width: 100%;
+    background: var(--primary); color: var(--primary-ink);
+    border: none; padding: 11px; border-radius: 10px;
+    font-family: inherit; font-weight: 600; font-size: 14px;
+    cursor: pointer;
+  }
+  .ob-checklist-card .finish-btn:disabled {
+    background: var(--surface-2); color: var(--ink-3); cursor: not-allowed;
+  }
+  .ob-checklist-card .finish-btn:not(:disabled):hover {
+    background: #266440;
+  }
+
+  /* Completion screen */
+  .ob-complete .ob-container { text-align: center; padding-top: 64px; }
+  .ob-complete .confetti { font-size: 56px; margin-bottom: 8px; }
+  .ob-complete h2 { font-size: 32px; margin-bottom: 12px; }
+  .ob-complete .lede { font-size: 16px; max-width: 480px; margin: 0 auto 32px; }
+  .ob-complete .summary-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    margin: 0 auto 28px;
+    max-width: 480px;
+    text-align: left;
+  }
+  .ob-complete .summary-card h4 {
+    margin: 0 0 14px; font-size: 13px; color: var(--ink-3);
+    text-transform: uppercase; letter-spacing: .06em; font-weight: 700;
+  }
+  .ob-complete .summary-card .summary-row {
+    display: flex; justify-content: space-between; padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .ob-complete .summary-card .summary-row:last-child { border-bottom: none; }
+  .ob-complete .summary-card .summary-row .lbl { color: var(--ink-2); }
+  .ob-complete .summary-card .summary-row .val { color: var(--ink); font-weight: 600; }
+
+  /* Subflow modal helpers */
+  .ob-modal-section { margin-bottom: 18px; }
+  .ob-modal-section h4 {
+    margin: 0 0 4px; font-size: 13px; font-weight: 700; color: var(--ink);
+    text-transform: uppercase; letter-spacing: .04em;
+  }
+  .ob-modal-section .hint {
+    font-size: 12px; color: var(--ink-3); margin-bottom: 10px;
+  }
+  .ob-rule-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .ob-rule-row:last-child { border-bottom: none; }
+  .ob-rule-row .icon { font-size: 18px; width: 22px; text-align: center; }
+  .ob-rule-row .rule-name { flex: 1; font-size: 14px; color: var(--ink); }
+  .ob-rule-row .rule-name .small { font-size: 12px; color: var(--ink-3); display: block; }
+  .ob-toggle {
+    width: 36px; height: 20px; border-radius: 999px;
+    background: #d6d2c4; position: relative; cursor: pointer;
+    transition: background .15s;
+    flex-shrink: 0;
+  }
+  .ob-toggle::after {
+    content: ''; position: absolute;
+    top: 2px; left: 2px; width: 16px; height: 16px;
+    background: white; border-radius: 50%;
+    transition: left .15s;
+  }
+  .ob-toggle.on { background: var(--primary); }
+  .ob-toggle.on::after { left: 18px; }
+
+  .ob-amenity-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+  }
+  .ob-amenity-cell {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px;
+    border: 1.5px solid var(--border); border-radius: 10px;
+    cursor: pointer;
+    background: var(--surface);
+    transition: border-color .15s, background .15s;
+    font-size: 13px; color: var(--ink);
+  }
+  .ob-amenity-cell:hover { border-color: var(--primary); }
+  .ob-amenity-cell.selected {
+    border-color: var(--primary); background: var(--primary-soft);
+  }
+  .ob-amenity-cell .amenity-emoji { font-size: 18px; }
+
+  .ob-invite-tabs {
+    display: flex; gap: 4px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+  .ob-invite-tab {
+    background: transparent; border: none; padding: 9px 13px;
+    color: var(--ink-3); font-size: 13px; font-weight: 600; cursor: pointer;
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+    font-family: inherit;
+  }
+  .ob-invite-tab:hover { color: var(--ink-2); }
+  .ob-invite-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+  .ob-invite-panel { display: none; }
+  .ob-invite-panel.active { display: block; }
+
+  .ob-invite-link-box {
+    display: flex; gap: 8px;
+    padding: 12px;
+    background: var(--surface-2); border: 1px dashed var(--border);
+    border-radius: 10px;
+    font-family: ui-monospace, SF Mono, Menlo, monospace;
+    font-size: 13px;
+  }
+  .ob-invite-link-box .link {
+    flex: 1; min-width: 0;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    color: var(--ink);
+  }
+  .ob-invite-link-help {
+    font-size: 12px; color: var(--ink-3); line-height: 1.5;
+    margin-top: 10px;
+  }
 </style>
 </head>
 <body>
@@ -1653,6 +2046,11 @@
             <svg class="ic" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             <span style="flex:1">Switch to board view</span>
             <span style="font-size:11px;color:var(--ink-3);font-weight:500">Board admin</span>
+          </button>
+          <button class="avatar-menu-item" onclick="enterOnboarding(); closeAvatarMenu()" id="onboardingEntryBtn">
+            <svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+            <span style="flex:1">Set up a new community</span>
+            <span style="font-size:11px;color:var(--ink-3);font-weight:500">Demo flow</span>
           </button>
           <div style="border-top:1px solid var(--border)"></div>
           <button class="avatar-menu-item" onclick="showToast('Signed out'); closeAvatarMenu()">
@@ -3219,6 +3617,393 @@
   </main>
 </div>
 
+<!-- ============ ONBOARDING SHELL (Common Ground platform setup) ============ -->
+<div class="onboarding-shell">
+
+  <!-- Shared header -->
+  <header class="ob-header">
+    <div class="ob-brand">
+      <div class="ob-brand-mark">CG</div>
+      <div class="ob-brand-text">Common Ground
+        <span class="platform-sub">Community platform</span>
+      </div>
+    </div>
+    <div class="ob-header-actions">
+      <span class="ob-step-marker" id="obStepMarker">Welcome</span>
+      <button class="ob-exit-btn" onclick="exitOnboarding()">Exit demo</button>
+    </div>
+  </header>
+
+  <!-- ---- Screen: Landing ---- -->
+  <section class="ob-screen ob-landing active" id="ob-screen-landing">
+    <div class="ob-container">
+      <h1>The operating system for the place you live.</h1>
+      <p class="lede">Common Ground gives every neighborhood a community feed, transparent rules, easy dues, and a real way to know your neighbors — without becoming yet another platform that screams for attention.</p>
+      <div class="cta-row">
+        <button class="btn" onclick="goOnboardingStep('community')">Set up your community →</button>
+        <button class="btn ghost" onclick="exitOnboarding()">See a sample community</button>
+      </div>
+      <div class="pitch-grid">
+        <div class="pitch">
+          <div class="emoji">🏡</div>
+          <h3>Built for residents first</h3>
+          <p>A community feed that merges board votes, neighbor polls, and maintenance updates — without becoming Nextdoor.</p>
+        </div>
+        <div class="pitch">
+          <div class="emoji">📋</div>
+          <h3>Transparent governance</h3>
+          <p>Rules, decisions, and dues are easy to find and easy to follow. Boards moderate; residents see where the trust comes from.</p>
+        </div>
+        <div class="pitch">
+          <div class="emoji">👋</div>
+          <h3>Neighbors, not strangers</h3>
+          <p>Block-level views, neighbor recommendations, and welcome rituals make the platform a seed for real-world community.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---- Screen: Step 1 — Community profile ---- -->
+  <section class="ob-screen ob-form-screen" id="ob-screen-community">
+    <div class="ob-container">
+      <div class="ob-step-label">Step 1 of 2 · Community</div>
+      <h2>Tell us about your community</h2>
+      <p class="lede">A few basics so we can set things up. You can change any of this later.</p>
+      <div class="ob-form">
+        <div class="ob-field">
+          <label for="obCommName">Community name</label>
+          <span class="hint">What residents call your neighborhood. This shows up everywhere.</span>
+          <input type="text" id="obCommName" placeholder="e.g., Brookside Place HOA">
+        </div>
+        <div class="ob-field-row">
+          <div class="ob-field">
+            <label for="obCommType">Community type</label>
+            <select id="obCommType">
+              <option>HOA</option>
+              <option>Condo association</option>
+              <option>Co-op</option>
+              <option>Neighborhood association</option>
+              <option>Townhome community</option>
+            </select>
+          </div>
+          <div class="ob-field">
+            <label for="obCommUnits">Approx. households</label>
+            <input type="number" id="obCommUnits" placeholder="142" min="2">
+          </div>
+        </div>
+        <div class="ob-field">
+          <label for="obCommLocation">City and state</label>
+          <input type="text" id="obCommLocation" placeholder="e.g., Portland, OR">
+        </div>
+        <div class="ob-form-foot">
+          <button class="btn ghost" onclick="goOnboardingStep('landing')">← Back</button>
+          <button class="btn" onclick="submitCommunityStep()">Continue →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---- Screen: Step 2 — Founder account ---- -->
+  <section class="ob-screen ob-form-screen" id="ob-screen-founder">
+    <div class="ob-container">
+      <div class="ob-step-label">Step 2 of 2 · Your account</div>
+      <h2>Create your account</h2>
+      <p class="lede">You'll be the first board admin. You can hand off or add more admins later.</p>
+      <div class="ob-form">
+        <div class="ob-field-row">
+          <div class="ob-field">
+            <label for="obFounderName">Your name</label>
+            <input type="text" id="obFounderName" placeholder="First Last">
+          </div>
+          <div class="ob-field">
+            <label for="obFounderUnit">Your unit / address</label>
+            <input type="text" id="obFounderUnit" placeholder="Unit 142">
+          </div>
+        </div>
+        <div class="ob-field">
+          <label for="obFounderEmail">Email</label>
+          <input type="email" id="obFounderEmail" placeholder="you@example.com">
+        </div>
+        <div class="ob-field">
+          <label for="obFounderRole">Your role</label>
+          <select id="obFounderRole">
+            <option>Board President</option>
+            <option>Treasurer</option>
+            <option>Secretary</option>
+            <option>Community manager</option>
+            <option>Just a motivated resident</option>
+          </select>
+        </div>
+        <div class="ob-form-foot">
+          <button class="btn ghost" onclick="goOnboardingStep('community')">← Back</button>
+          <button class="btn" onclick="submitFounderStep()">Continue to setup →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---- Screen: Setup hub ---- -->
+  <section class="ob-screen ob-hub" id="ob-screen-hub">
+    <div class="ob-container">
+      <div class="ob-hub-head">
+        <div>
+          <h2 id="obHubGreeting">Welcome, founder 👋</h2>
+          <p id="obHubSub">Here's what to set up next. You can do these in any order, skip what you don't need yet, and come back later.</p>
+        </div>
+        <div class="ob-progress-pill" id="obProgressPill">0 of 4 done</div>
+      </div>
+
+      <div class="ob-hub-grid">
+        <div class="ob-task-cards" id="obTaskCards">
+          <button class="ob-task-card" data-task="rules" onclick="openOnboardingSubflow('rules')">
+            <div class="task-head">
+              <span class="task-emoji">📋</span>
+              <span class="task-status">5 min</span>
+            </div>
+            <h3>Set up your rules</h3>
+            <p>Start with our HOA starter pack, then edit. Or build from scratch — your call.</p>
+            <div class="summary" id="obRulesSummary">Not started</div>
+          </button>
+          <button class="ob-task-card" data-task="dues" onclick="openOnboardingSubflow('dues')">
+            <div class="task-head">
+              <span class="task-emoji">💳</span>
+              <span class="task-status">3 min</span>
+            </div>
+            <h3>Configure dues</h3>
+            <p>Monthly amount, due dates, and late fees. Accept ACH and card by default.</p>
+            <div class="summary" id="obDuesSummary">Not started</div>
+          </button>
+          <button class="ob-task-card" data-task="amenities" onclick="openOnboardingSubflow('amenities')">
+            <div class="task-head">
+              <span class="task-emoji">🏊</span>
+              <span class="task-status">2 min</span>
+            </div>
+            <h3>Pick your amenities</h3>
+            <p>Toggle on what your community has. We'll set up booking flows for each one.</p>
+            <div class="summary" id="obAmenitiesSummary">Not started</div>
+          </button>
+          <button class="ob-task-card" data-task="invite" onclick="openOnboardingSubflow('invite')">
+            <div class="task-head">
+              <span class="task-emoji">👋</span>
+              <span class="task-status">5 min</span>
+            </div>
+            <h3>Invite households</h3>
+            <p>Paste a roster, add a few at a time, or share an invite link for residents to claim their own unit.</p>
+            <div class="summary" id="obInviteSummary">Not started</div>
+          </button>
+        </div>
+
+        <aside class="ob-checklist-card">
+          <h4>Setup progress</h4>
+          <div class="progress" id="obChecklistProgress">0 of 4 complete · Skip what you don't need</div>
+          <div class="ob-checklist-bar"><span id="obChecklistBar" style="width:0%"></span></div>
+          <div class="ob-checklist" id="obChecklist">
+            <div class="ob-checklist-item" data-task="rules"><div class="checkbox">✓</div><div class="text">Set up your rules</div></div>
+            <div class="ob-checklist-item" data-task="dues"><div class="checkbox">✓</div><div class="text">Configure dues</div></div>
+            <div class="ob-checklist-item" data-task="amenities"><div class="checkbox">✓</div><div class="text">Pick your amenities</div></div>
+            <div class="ob-checklist-item" data-task="invite"><div class="checkbox">✓</div><div class="text">Invite households</div></div>
+          </div>
+          <button class="finish-btn" id="obFinishBtn" onclick="finishOnboarding()">Finish setup →</button>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---- Screen: Completion ---- -->
+  <section class="ob-screen ob-complete" id="ob-screen-complete">
+    <div class="ob-container">
+      <div class="confetti">🎉</div>
+      <h2 id="obCompleteHeading">Your community is ready.</h2>
+      <p class="lede" id="obCompleteSub">Your residents can start signing in as invites go out. You can keep filling in details from the board console.</p>
+      <div class="summary-card" id="obCompleteSummary">
+        <h4>What you set up</h4>
+        <!-- Filled by JS -->
+      </div>
+      <div class="cta-row" style="display:flex;gap:12px;justify-content:center">
+        <button class="btn" onclick="exitOnboarding()">Explore your dashboard →</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============ ONBOARDING SUBFLOW MODALS ============ -->
+
+<!-- Rules subflow -->
+<div class="modal-backdrop" id="obRulesModal">
+  <div class="modal" style="max-width:580px">
+    <div class="modal-head">
+      <h3>Set up your rules</h3>
+      <button class="close-btn" onclick="closeModal('obRulesModal')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="ob-modal-section">
+        <div style="display:flex;align-items:center;gap:10px;padding:14px;background:var(--primary-soft);border-radius:10px;margin-bottom:18px">
+          <div style="font-size:22px">📦</div>
+          <div style="flex:1;font-size:13px;color:var(--ink-2);line-height:1.5">
+            <strong style="color:var(--ink)">Start with our HOA starter pack?</strong>
+            <span style="display:block">7 common categories with sensible defaults. You can edit or remove any of them.</span>
+          </div>
+          <div class="ob-toggle on" id="obStarterToggle" onclick="toggleOnboardingStarter()"></div>
+        </div>
+      </div>
+      <div class="ob-modal-section" id="obStarterRules">
+        <h4>Starter categories</h4>
+        <div class="hint">Toggle off anything that doesn't apply to your community.</div>
+        <div class="ob-rule-row"><div class="icon">🐾</div><div class="rule-name">Pets &amp; Animals<span class="small">Leash rules, breed limits, waste pickup</span></div><div class="ob-toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="ob-rule-row"><div class="icon">🚗</div><div class="rule-name">Parking &amp; Vehicles<span class="small">Guest passes, RV storage, EV charging</span></div><div class="ob-toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="ob-rule-row"><div class="icon">🔊</div><div class="rule-name">Noise &amp; Quiet Hours<span class="small">Standard 10pm-7am quiet hours</span></div><div class="ob-toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="ob-rule-row"><div class="icon">🏠</div><div class="rule-name">Architectural Modifications<span class="small">Exterior changes, paint, fencing</span></div><div class="ob-toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="ob-rule-row"><div class="icon">🏊</div><div class="rule-name">Pool &amp; Amenities<span class="small">Guest limits, hours, conduct</span></div><div class="ob-toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="ob-rule-row"><div class="icon">♻️</div><div class="rule-name">Trash &amp; Recycling<span class="small">Pickup days, bulk items, composting</span></div><div class="ob-toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="ob-rule-row"><div class="icon">🔑</div><div class="rule-name">Rentals &amp; Subletting<span class="small">Short-term rules, lease minimums</span></div><div class="ob-toggle on" onclick="this.classList.toggle('on')"></div></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn ghost" onclick="closeModal('obRulesModal')">Cancel</button>
+      <button class="btn" onclick="completeOnboardingTask('rules')">Save rules</button>
+    </div>
+  </div>
+</div>
+
+<!-- Dues subflow -->
+<div class="modal-backdrop" id="obDuesModal">
+  <div class="modal" style="max-width:520px">
+    <div class="modal-head">
+      <h3>Configure dues</h3>
+      <button class="close-btn" onclick="closeModal('obDuesModal')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="ob-field-row">
+        <div class="ob-field">
+          <label>Monthly amount</label>
+          <input type="text" id="obDuesAmount" placeholder="$285" value="$285">
+        </div>
+        <div class="ob-field">
+          <label>Due date</label>
+          <select id="obDuesDueDate">
+            <option>1st of each month</option>
+            <option>5th of each month</option>
+            <option>15th of each month</option>
+            <option>Last day of month</option>
+          </select>
+        </div>
+      </div>
+      <div class="ob-field-row">
+        <div class="ob-field">
+          <label>Late fee</label>
+          <input type="text" id="obDuesLateFee" placeholder="$25" value="$25">
+        </div>
+        <div class="ob-field">
+          <label>After grace period</label>
+          <select id="obDuesGrace">
+            <option>5 days</option>
+            <option>10 days</option>
+            <option>15 days</option>
+            <option>No grace period</option>
+          </select>
+        </div>
+      </div>
+      <div class="ob-modal-section" style="margin-top:18px">
+        <h4>Payment methods</h4>
+        <div class="hint">Residents pick how they pay. ACH transfers are free; card processing fees are passed to the resident by default.</div>
+        <div class="ob-rule-row"><div class="icon">🏦</div><div class="rule-name">ACH bank transfer<span class="small">No fees</span></div><div class="ob-toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="ob-rule-row"><div class="icon">💳</div><div class="rule-name">Credit / debit card<span class="small">Resident pays 2.9% + $0.30 fee</span></div><div class="ob-toggle on" onclick="this.classList.toggle('on')"></div></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn ghost" onclick="closeModal('obDuesModal')">Cancel</button>
+      <button class="btn" onclick="completeOnboardingTask('dues')">Save dues</button>
+    </div>
+  </div>
+</div>
+
+<!-- Amenities subflow -->
+<div class="modal-backdrop" id="obAmenitiesModal">
+  <div class="modal" style="max-width:580px">
+    <div class="modal-head">
+      <h3>Pick your amenities</h3>
+      <button class="close-btn" onclick="closeModal('obAmenitiesModal')">×</button>
+    </div>
+    <div class="modal-body">
+      <p style="margin:0 0 16px;font-size:13px;color:var(--ink-2)">Toggle on the amenities your community has. We'll create booking flows for each. You can add more later.</p>
+      <div class="ob-amenity-grid" id="obAmenityGrid">
+        <div class="ob-amenity-cell selected" data-amenity="Clubhouse" onclick="this.classList.toggle('selected')"><span class="amenity-emoji">🏛</span><span>Clubhouse</span></div>
+        <div class="ob-amenity-cell selected" data-amenity="Pool" onclick="this.classList.toggle('selected')"><span class="amenity-emoji">🏊</span><span>Pool</span></div>
+        <div class="ob-amenity-cell selected" data-amenity="Pool Cabana" onclick="this.classList.toggle('selected')"><span class="amenity-emoji">🌴</span><span>Pool Cabana</span></div>
+        <div class="ob-amenity-cell selected" data-amenity="BBQ Patio" onclick="this.classList.toggle('selected')"><span class="amenity-emoji">🔥</span><span>BBQ Patio</span></div>
+        <div class="ob-amenity-cell selected" data-amenity="Tennis Court" onclick="this.classList.toggle('selected')"><span class="amenity-emoji">🎾</span><span>Tennis Court</span></div>
+        <div class="ob-amenity-cell" data-amenity="Dog Park" onclick="this.classList.toggle('selected')"><span class="amenity-emoji">🐶</span><span>Dog Park</span></div>
+        <div class="ob-amenity-cell" data-amenity="Gym" onclick="this.classList.toggle('selected')"><span class="amenity-emoji">🏋️</span><span>Gym</span></div>
+        <div class="ob-amenity-cell" data-amenity="Playground" onclick="this.classList.toggle('selected')"><span class="amenity-emoji">🛝</span><span>Playground</span></div>
+        <div class="ob-amenity-cell" data-amenity="EV Charging" onclick="this.classList.toggle('selected')"><span class="amenity-emoji">🔌</span><span>EV Charging</span></div>
+        <div class="ob-amenity-cell" data-amenity="Mailroom" onclick="this.classList.toggle('selected')"><span class="amenity-emoji">📬</span><span>Mailroom</span></div>
+        <div class="ob-amenity-cell" data-amenity="Guest Suite" onclick="this.classList.toggle('selected')"><span class="amenity-emoji">🛏</span><span>Guest Suite</span></div>
+        <div class="ob-amenity-cell" data-amenity="Co-working Lounge" onclick="this.classList.toggle('selected')"><span class="amenity-emoji">💼</span><span>Co-working</span></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn ghost" onclick="closeModal('obAmenitiesModal')">Cancel</button>
+      <button class="btn" onclick="completeOnboardingTask('amenities')">Save amenities</button>
+    </div>
+  </div>
+</div>
+
+<!-- Invite households subflow -->
+<div class="modal-backdrop" id="obInviteModal">
+  <div class="modal" style="max-width:560px">
+    <div class="modal-head">
+      <h3>Invite households</h3>
+      <button class="close-btn" onclick="closeModal('obInviteModal')">×</button>
+    </div>
+    <div class="modal-body">
+      <p style="margin:0 0 16px;font-size:13px;color:var(--ink-2)">Three ways to get your neighbors on the platform. Mix and match.</p>
+      <div class="ob-invite-tabs">
+        <button class="ob-invite-tab active" data-invite-tab="bulk">Paste a roster</button>
+        <button class="ob-invite-tab" data-invite-tab="one">Add one at a time</button>
+        <button class="ob-invite-tab" data-invite-tab="link">Share invite link</button>
+      </div>
+
+      <div class="ob-invite-panel active" id="ob-invite-panel-bulk">
+        <p style="margin:0 0 10px;font-size:13px;color:var(--ink-2)">One household per line, in this format:</p>
+        <textarea id="obInviteBulk" rows="7" placeholder="Unit 142, Sarah Chen, sarah.chen@example.com&#10;Unit 087, Marcus Whitfield, marcus@example.com&#10;Unit 213, Nadia Brooks, nadia@example.com" style="width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:8px;font-family:ui-monospace,SF Mono,Menlo,monospace;font-size:13px;background:var(--surface)"></textarea>
+        <p style="margin:10px 0 0;font-size:12px;color:var(--ink-3)">CSV import is coming — for now, copy a few columns from your roster spreadsheet.</p>
+      </div>
+
+      <div class="ob-invite-panel" id="ob-invite-panel-one">
+        <div class="ob-field-row">
+          <div class="ob-field">
+            <label>Unit</label>
+            <input type="text" placeholder="Unit 142">
+          </div>
+          <div class="ob-field">
+            <label>Name</label>
+            <input type="text" placeholder="Sarah Chen">
+          </div>
+        </div>
+        <div class="ob-field">
+          <label>Email</label>
+          <input type="email" placeholder="sarah.chen@example.com">
+        </div>
+        <button class="btn ghost sm" onclick="showToast('Added — keep going or move on')">+ Add &amp; another</button>
+      </div>
+
+      <div class="ob-invite-panel" id="ob-invite-panel-link">
+        <p style="margin:0 0 10px;font-size:13px;color:var(--ink-2)">Share this link in your existing community email thread, group chat, or HOA newsletter. Residents click it, claim their unit, and they're in.</p>
+        <div class="ob-invite-link-box">
+          <span class="link" id="obInviteLink">commonground.app/invite/B7K-3PQ-X9F</span>
+          <button class="btn sm ghost" onclick="showToast('Invite link copied to clipboard')">Copy</button>
+        </div>
+        <p class="ob-invite-link-help">The link auto-expires in 30 days and can be rotated anytime. Each resident verifies their unit when they sign up.</p>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn ghost" onclick="closeModal('obInviteModal')">Cancel</button>
+      <button class="btn" onclick="completeOnboardingTask('invite')">Save invites</button>
+    </div>
+  </div>
+</div>
+
 <!-- ============ ADMIN: EDIT RULE MODAL ============ -->
 <div class="modal-backdrop" id="adminRuleModal">
   <div class="modal" style="max-width:560px">
@@ -4328,6 +5113,212 @@
   }
 
   // ============================================================
+  // ONBOARDING — Common Ground community setup flow
+  // ============================================================
+
+  const onboardingState = {
+    currentScreen: 'landing',
+    community: { name: '', type: 'HOA', units: '', location: '' },
+    founder:   { name: '', unit: '', email: '', role: 'Board President' },
+    tasks:     { rules: false, dues: false, amenities: false, invite: false },
+    starterPackOn: true,
+    selectedAmenityCount: 5, // matches default selections in the modal
+    inviteCount: 0
+  };
+
+  const SCREEN_LABELS = {
+    landing:   'Welcome',
+    community: 'Step 1 · Community',
+    founder:   'Step 2 · Account',
+    hub:       'Setup hub',
+    complete:  'All set'
+  };
+
+  function enterOnboarding() {
+    // Reset state for a clean demo run
+    onboardingState.currentScreen = 'landing';
+    onboardingState.tasks = { rules: false, dues: false, amenities: false, invite: false };
+    onboardingState.community = { name: '', type: 'HOA', units: '', location: '' };
+    onboardingState.founder = { name: '', unit: '', email: '', role: 'Board President' };
+
+    // Reset form fields
+    document.getElementById('obCommName').value = '';
+    document.getElementById('obCommUnits').value = '';
+    document.getElementById('obCommLocation').value = '';
+    document.getElementById('obFounderName').value = '';
+    document.getElementById('obFounderUnit').value = '';
+    document.getElementById('obFounderEmail').value = '';
+
+    document.body.classList.add('onboarding-mode');
+    document.body.classList.remove('admin-mode');
+    showOnboardingScreen('landing');
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    renderOnboardingProgress();
+  }
+
+  function exitOnboarding() {
+    document.body.classList.remove('onboarding-mode');
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    showToast('Demo exited — back to the Maple Grove sample community');
+  }
+
+  function showOnboardingScreen(name) {
+    onboardingState.currentScreen = name;
+    document.querySelectorAll('.ob-screen').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById('ob-screen-' + name);
+    if (el) el.classList.add('active');
+    document.getElementById('obStepMarker').textContent = SCREEN_LABELS[name] || '';
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
+  function goOnboardingStep(name) {
+    showOnboardingScreen(name);
+  }
+
+  function submitCommunityStep() {
+    const name = document.getElementById('obCommName').value.trim();
+    const type = document.getElementById('obCommType').value;
+    const units = document.getElementById('obCommUnits').value.trim();
+    const location = document.getElementById('obCommLocation').value.trim();
+    if (!name) { showToast('Add a community name to continue'); return; }
+    onboardingState.community = { name, type, units, location };
+    showOnboardingScreen('founder');
+  }
+
+  function submitFounderStep() {
+    const name = document.getElementById('obFounderName').value.trim();
+    const unit = document.getElementById('obFounderUnit').value.trim();
+    const email = document.getElementById('obFounderEmail').value.trim();
+    const role = document.getElementById('obFounderRole').value;
+    if (!name || !email) { showToast('Add your name and email to continue'); return; }
+    onboardingState.founder = { name, unit, email, role };
+
+    // Personalize the hub greeting
+    const firstName = name.split(/\s+/)[0];
+    document.getElementById('obHubGreeting').textContent = `Welcome, ${firstName} 👋`;
+    document.getElementById('obHubSub').textContent =
+      `Let's get ${onboardingState.community.name} ready for residents. Set up what you need — skip anything you don't.`;
+
+    showOnboardingScreen('hub');
+    renderOnboardingProgress();
+  }
+
+  function openOnboardingSubflow(task) {
+    const modalId = {
+      rules: 'obRulesModal',
+      dues:  'obDuesModal',
+      amenities: 'obAmenitiesModal',
+      invite: 'obInviteModal'
+    }[task];
+    if (!modalId) return;
+    document.getElementById(modalId).classList.add('show');
+  }
+
+  function toggleOnboardingStarter() {
+    const t = document.getElementById('obStarterToggle');
+    t.classList.toggle('on');
+    onboardingState.starterPackOn = t.classList.contains('on');
+    document.getElementById('obStarterRules').style.opacity = onboardingState.starterPackOn ? '1' : '.4';
+    document.getElementById('obStarterRules').style.pointerEvents = onboardingState.starterPackOn ? 'auto' : 'none';
+  }
+
+  function completeOnboardingTask(task) {
+    onboardingState.tasks[task] = true;
+
+    // Update summary text on the hub card
+    const summaries = {
+      rules: () => {
+        const onCount = document.querySelectorAll('#obStarterRules .ob-toggle.on').length;
+        return onboardingState.starterPackOn ? `${onCount} categories ready · published to residents` : 'Starting from scratch · 0 rules so far';
+      },
+      dues: () => {
+        const amount = document.getElementById('obDuesAmount').value || '$285';
+        const due = document.getElementById('obDuesDueDate').value;
+        return `${amount} due ${due.toLowerCase()}`;
+      },
+      amenities: () => {
+        const selected = document.querySelectorAll('.ob-amenity-cell.selected').length;
+        onboardingState.selectedAmenityCount = selected;
+        return `${selected} amenities selected`;
+      },
+      invite: () => {
+        const bulk = document.getElementById('obInviteBulk').value.trim();
+        const lines = bulk ? bulk.split('\n').filter(l => l.trim()).length : 0;
+        onboardingState.inviteCount = lines;
+        if (lines > 0) return `${lines} households queued · invites will send when you finish setup`;
+        return 'Invite link ready to share';
+      }
+    };
+    document.getElementById('ob' + task[0].toUpperCase() + task.slice(1) + 'Summary').textContent = summaries[task]();
+
+    closeModal({
+      rules: 'obRulesModal',
+      dues:  'obDuesModal',
+      amenities: 'obAmenitiesModal',
+      invite: 'obInviteModal'
+    }[task]);
+    showToast(`${task[0].toUpperCase() + task.slice(1)} saved`);
+    renderOnboardingProgress();
+  }
+
+  function renderOnboardingProgress() {
+    const tasks = onboardingState.tasks;
+    const doneCount = Object.values(tasks).filter(Boolean).length;
+    const total = Object.keys(tasks).length;
+    document.getElementById('obProgressPill').textContent = `${doneCount} of ${total} done`;
+    document.getElementById('obChecklistProgress').textContent =
+      `${doneCount} of ${total} complete · Skip what you don't need`;
+    document.getElementById('obChecklistBar').style.width = (doneCount / total * 100) + '%';
+
+    // Update checklist items and task cards
+    document.querySelectorAll('.ob-checklist-item').forEach(item => {
+      item.classList.toggle('done', tasks[item.dataset.task]);
+    });
+    document.querySelectorAll('.ob-task-card').forEach(card => {
+      const t = card.dataset.task;
+      const done = tasks[t];
+      card.classList.toggle('done', done);
+      const status = card.querySelector('.task-status');
+      if (status) status.textContent = done ? '✓ Done' : status.dataset.original || status.textContent;
+      if (status && !status.dataset.original) status.dataset.original = status.textContent;
+    });
+
+    // Finish button always enabled — it's OK to finish with partial setup,
+    // we just show a different completion message
+    document.getElementById('obFinishBtn').textContent =
+      doneCount === total ? 'Finish setup →' : `Finish anyway (${doneCount}/${total}) →`;
+  }
+
+  function finishOnboarding() {
+    // Build summary card content
+    const c = onboardingState.community;
+    const t = onboardingState.tasks;
+    const rulesCount = document.querySelectorAll('#obStarterRules .ob-toggle.on').length;
+    const lines = [];
+    lines.push(`<div class="summary-row"><span class="lbl">Community</span><span class="val">${escapeHtml(c.name || 'Unnamed')}</span></div>`);
+    lines.push(`<div class="summary-row"><span class="lbl">Households</span><span class="val">${escapeHtml(c.units || '—')}</span></div>`);
+    if (t.rules)     lines.push(`<div class="summary-row"><span class="lbl">Rules</span><span class="val">${rulesCount} categories published</span></div>`);
+    if (t.dues)      lines.push(`<div class="summary-row"><span class="lbl">Dues</span><span class="val">${escapeHtml(document.getElementById('obDuesAmount').value || '$285')} / month</span></div>`);
+    if (t.amenities) lines.push(`<div class="summary-row"><span class="lbl">Amenities</span><span class="val">${onboardingState.selectedAmenityCount} selected</span></div>`);
+    if (t.invite)    lines.push(`<div class="summary-row"><span class="lbl">Invites</span><span class="val">${onboardingState.inviteCount > 0 ? onboardingState.inviteCount + ' queued' : 'Link ready to share'}</span></div>`);
+    document.getElementById('obCompleteSummary').innerHTML = '<h4>What you set up</h4>' + lines.join('');
+
+    // Personalize heading
+    const firstName = (onboardingState.founder.name || 'you').split(/\s+/)[0];
+    document.getElementById('obCompleteHeading').textContent =
+      `${onboardingState.community.name || 'Your community'} is ready, ${firstName}.`;
+    const doneCount = Object.values(onboardingState.tasks).filter(Boolean).length;
+    document.getElementById('obCompleteSub').textContent = doneCount === 4
+      ? 'Everything\'s in place. Your residents can start signing in as invites go out.'
+      : `You can keep filling in what\'s left from the board console anytime. ${doneCount} of 4 set up so far.`;
+
+    showOnboardingScreen('complete');
+  }
+
+  // Invite subflow tab switching
+  document.addEventListener('DOMContentLoaded', () => {}); // (no-op placeholder; bindings done below in init)
+
+  // ============================================================
   // LOCAL SERVICES — community-recommended + sponsored directory
   // ============================================================
   // Three trust tiers, always labeled:
@@ -5214,6 +6205,15 @@
   // ---------- Service category filter chips ----------
   document.querySelectorAll('#servicesChips .chip').forEach(chip => {
     chip.addEventListener('click', () => setSvcFilter(chip.dataset.svcCat));
+  });
+
+  // ---------- Onboarding invite-tab switching ----------
+  document.querySelectorAll('.ob-invite-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const name = tab.dataset.inviteTab;
+      document.querySelectorAll('.ob-invite-tab').forEach(t => t.classList.toggle('active', t === tab));
+      document.querySelectorAll('.ob-invite-panel').forEach(p => p.classList.toggle('active', p.id === 'ob-invite-panel-' + name));
+    });
   });
 
   // ---------- Init admin data ----------
