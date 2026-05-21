@@ -1594,8 +1594,32 @@
   body.onboarding-mode .onboarding-shell {
     display: block;
     min-height: 100vh;
-    background: linear-gradient(180deg, #faf6ec 0%, var(--bg) 100%);
+    background: linear-gradient(180deg, #faf6ec 0%, var(--bg) 60%, #f4ebd9 100%);
+    position: relative;
+    overflow-x: hidden;
   }
+  /* Atmospheric background — soft glow + dot pattern, sits behind landing */
+  body.onboarding-mode .onboarding-shell::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(900px 520px at 12% -8%, rgba(47,122,82,0.18), transparent 60%),
+      radial-gradient(720px 460px at 92% 8%, rgba(217,119,87,0.14), transparent 65%),
+      radial-gradient(600px 360px at 50% 35%, rgba(74,155,113,0.10), transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  body.onboarding-mode .onboarding-shell::after {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(31,42,36,0.06) 1px, transparent 1px);
+    background-size: 22px 22px;
+    background-position: 0 0;
+    -webkit-mask-image: linear-gradient(180deg, black 0%, transparent 70%);
+            mask-image: linear-gradient(180deg, black 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  body.onboarding-mode .ob-header,
+  body.onboarding-mode .ob-screen { position: relative; z-index: 1; }
 
   /* Shared header across onboarding screens */
   .ob-header {
@@ -1643,38 +1667,45 @@
   /* Landing — polished SaaS layout */
   .ob-landing { padding: 0 !important; }
   .ob-landing .ob-container {
-    max-width: 1080px; margin: 0 auto;
-    padding: 64px 32px 96px;
+    max-width: 1120px; margin: 0 auto;
+    padding: 72px 32px 100px;
     text-align: center;
+    position: relative;
   }
 
   /* Eyebrow pill above headline */
   .ob-eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
-    background: var(--primary-soft); color: var(--primary);
+    background: rgba(255,255,255,.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--primary);
     border: 1px solid #cfe5d8;
-    padding: 6px 14px; border-radius: 999px;
-    font-size: 12px; font-weight: 600; letter-spacing: .01em;
-    margin-bottom: 22px;
+    padding: 7px 16px; border-radius: 999px;
+    font-size: 12.5px; font-weight: 600; letter-spacing: .01em;
+    margin-bottom: 26px;
+    box-shadow: 0 1px 2px rgba(31,42,36,.04);
   }
   .ob-eyebrow .dot {
-    width: 6px; height: 6px; border-radius: 999px;
+    width: 7px; height: 7px; border-radius: 999px;
     background: var(--primary); display: inline-block;
+    box-shadow: 0 0 0 4px rgba(47,122,82,.18);
   }
 
   .ob-landing h1 {
-    font-size: 56px; line-height: 1.04; letter-spacing: -.025em;
-    margin: 0 auto 22px; color: var(--ink); font-weight: 600;
-    max-width: 820px;
+    font-size: 68px; line-height: 1.02; letter-spacing: -.03em;
+    margin: 0 auto 24px; color: var(--ink); font-weight: 600;
+    max-width: 880px;
   }
   .ob-landing h1 .accent {
-    background: linear-gradient(120deg, #2f7a52 0%, #4a9b71 100%);
+    background: linear-gradient(120deg, #2f7a52 0%, #4a9b71 50%, #6bb98a 100%);
     -webkit-background-clip: text; background-clip: text;
     -webkit-text-fill-color: transparent;
+    position: relative;
   }
   .ob-landing .lede {
-    font-size: 19px; color: var(--ink-2); margin: 0 auto 36px;
-    line-height: 1.55; max-width: 620px;
+    font-size: 20px; color: var(--ink-2); margin: 0 auto 40px;
+    line-height: 1.55; max-width: 640px; font-weight: 400;
   }
 
   .ob-landing .cta-row {
@@ -1898,14 +1929,197 @@
     box-shadow: 0 8px 22px rgba(0,0,0,.22);
   }
 
+  /* Trust strip — fake-but-plausible community names */
+  .landing-trust {
+    margin: 0 auto 64px; max-width: 880px;
+    display: flex; flex-direction: column; align-items: center; gap: 18px;
+  }
+  .landing-trust-label {
+    font-size: 11px; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--ink-3);
+  }
+  .landing-trust-row {
+    display: flex; align-items: center; justify-content: center;
+    gap: 36px; flex-wrap: wrap; opacity: .9;
+  }
+  .trust-name {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--ink-2); font-weight: 600; font-size: 14.5px;
+    letter-spacing: -.005em; opacity: .75;
+    transition: opacity .2s ease;
+  }
+  .trust-name:hover { opacity: 1; }
+  .trust-name .tn-mark {
+    width: 22px; height: 22px; border-radius: 6px;
+    display: grid; place-items: center;
+    background: var(--surface); border: 1px solid var(--border);
+    font-size: 11px; font-weight: 700; color: var(--ink-2);
+  }
+  .trust-name.maple .tn-mark { background: #e3f1e8; color: var(--primary); border-color: #cfe5d8; }
+  .trust-name.birch .tn-mark { background: #faecd0; color: var(--warn); border-color: #ecd9a8; }
+  .trust-name.oak   .tn-mark { background: #fbe9e0; color: var(--accent); border-color: #ecc9b3; }
+  .trust-name.cedar .tn-mark { background: #e2edf3; color: var(--info); border-color: #c8dde8; }
+  .trust-name.pine  .tn-mark { background: #e3f1e8; color: var(--primary); border-color: #cfe5d8; }
+
+  /* Floating notification card next to the preview */
+  .landing-preview-wrap {
+    position: relative;
+    margin: 8px auto 56px;
+    max-width: 880px;
+  }
+  .float-card {
+    position: absolute;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    box-shadow: 0 14px 32px -10px rgba(31,42,36,.18);
+    display: flex; align-items: center; gap: 10px;
+    text-align: left;
+    z-index: 2;
+    animation: floaty 6s ease-in-out infinite;
+  }
+  .float-card.fc-1 { top: -18px; left: -28px; }
+  .float-card.fc-2 { bottom: -22px; right: -28px; animation-delay: -3s; }
+  .float-card .fc-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: var(--primary-soft); display: grid; place-items: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .float-card.fc-2 .fc-icon { background: var(--accent-soft); }
+  .float-card .fc-text { line-height: 1.25; }
+  .float-card .fc-title { font-size: 12.5px; font-weight: 600; color: var(--ink); }
+  .float-card .fc-sub { font-size: 11px; color: var(--ink-3); }
+  @keyframes floaty {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  /* Feature card mini-visuals */
+  .pitch .mini {
+    margin-top: 16px; padding-top: 14px;
+    border-top: 1px dashed var(--border);
+  }
+  .mini .mini-row {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--ink-2);
+    padding: 4px 0;
+  }
+  .mini .mini-bar {
+    flex: 1; height: 6px; border-radius: 999px;
+    background: var(--surface-2); overflow: hidden;
+  }
+  .mini .mini-bar > span {
+    display: block; height: 100%; background: var(--primary); border-radius: 999px;
+  }
+  .mini .mini-bar.amber > span { background: var(--warn); }
+  .mini .mini-bar.coral  > span { background: var(--accent); }
+  .mini .mini-num { font-weight: 700; color: var(--ink); min-width: 32px; text-align: right; }
+  .mini .mini-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .mini .chip {
+    font-size: 11px; padding: 3px 9px; border-radius: 999px;
+    background: var(--surface-2); border: 1px solid var(--border);
+    color: var(--ink-2);
+  }
+  .mini .chip.green { background: var(--primary-soft); color: var(--primary); border-color: #cfe5d8; }
+  .mini .chip.coral { background: var(--accent-soft); color: var(--accent); border-color: #ecc9b3; }
+  .mini .mini-faces {
+    display: flex; align-items: center;
+  }
+  .mini .mini-faces .face {
+    width: 26px; height: 26px; border-radius: 999px;
+    border: 2px solid var(--surface);
+    margin-left: -8px;
+    display: grid; place-items: center;
+    font-size: 11px; font-weight: 700; color: white;
+  }
+  .mini .mini-faces .face:first-child { margin-left: 0; }
+  .mini .mini-faces .face.f1 { background: #2f7a52; }
+  .mini .mini-faces .face.f2 { background: #d97757; }
+  .mini .mini-faces .face.f3 { background: #386a8a; }
+  .mini .mini-faces .face.f4 { background: #c2862b; }
+  .mini .mini-faces .more {
+    font-size: 11.5px; color: var(--ink-3); margin-left: 8px; font-weight: 500;
+  }
+
+  /* Testimonial */
+  .landing-testimonial {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 44px 48px;
+    margin: 0 auto 64px;
+    max-width: 880px;
+    text-align: left;
+    position: relative;
+    box-shadow: 0 14px 32px -22px rgba(31,42,36,.16);
+  }
+  .landing-testimonial::before {
+    content: "“";
+    position: absolute; top: 6px; left: 32px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 100px; line-height: 1; color: var(--primary);
+    opacity: .18;
+  }
+  .landing-testimonial .quote {
+    font-size: 22px; line-height: 1.4; color: var(--ink);
+    font-weight: 500; letter-spacing: -.01em;
+    margin: 0 0 22px;
+    max-width: 720px;
+  }
+  .landing-testimonial .byline {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .landing-testimonial .byline-avatar {
+    width: 42px; height: 42px; border-radius: 999px;
+    background: linear-gradient(135deg, #2f7a52, #4a9b71);
+    color: white; display: grid; place-items: center;
+    font-weight: 700; font-size: 14px;
+  }
+  .landing-testimonial .byline-name {
+    font-size: 14px; font-weight: 600; color: var(--ink);
+  }
+  .landing-testimonial .byline-role {
+    font-size: 12.5px; color: var(--ink-3);
+  }
+
+  /* CTA band — patterned overlay */
+  .landing-cta-band {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .landing-cta-band::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(rgba(255,255,255,.10) 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-position: 0 0;
+    -webkit-mask-image: linear-gradient(135deg, black, transparent 70%);
+            mask-image: linear-gradient(135deg, black, transparent 70%);
+    pointer-events: none; z-index: -1;
+  }
+  .landing-cta-band::after {
+    content: "";
+    position: absolute; top: -50%; right: -10%;
+    width: 60%; height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,.10), transparent 60%);
+    pointer-events: none; z-index: -1;
+  }
+
   @media (max-width: 860px) {
-    .ob-landing .ob-container { padding: 40px 20px 64px; }
-    .ob-landing h1 { font-size: 38px; }
+    .ob-landing .ob-container { padding: 44px 20px 72px; }
+    .ob-landing h1 { font-size: 42px; }
     .ob-landing .lede { font-size: 16px; }
     .ob-landing .pitch-grid,
     .landing-how-grid { grid-template-columns: 1fr; }
     .lp-body { grid-template-columns: 1fr; }
     .landing-cta-band { flex-direction: column; align-items: flex-start; text-align: left; }
+    .float-card { display: none; }
+    .landing-testimonial { padding: 32px 28px; }
+    .landing-testimonial .quote { font-size: 18px; }
+    .landing-trust-row { gap: 18px; }
   }
 
   /* Form screens (steps 1 + 2) */
@@ -3874,55 +4088,83 @@
       </div>
       <p class="cta-micro">Free to set up · No credit card required · Up and running in under 15 minutes</p>
 
-      <!-- Product preview mock -->
-      <div class="landing-preview" aria-hidden="true">
-        <div class="lp-chrome">
-          <span></span><span></span><span></span>
-          <div class="lp-url">commonground.app/your-community</div>
+      <!-- Trust strip -->
+      <div class="landing-trust" aria-hidden="true">
+        <div class="landing-trust-label">Communities already growing on Common Ground</div>
+        <div class="landing-trust-row">
+          <span class="trust-name maple"><span class="tn-mark">M</span>Maple Grove HOA</span>
+          <span class="trust-name birch"><span class="tn-mark">B</span>Birch Hollow Condos</span>
+          <span class="trust-name oak"><span class="tn-mark">O</span>Oak Bend Townhomes</span>
+          <span class="trust-name cedar"><span class="tn-mark">C</span>Cedar Court Co-op</span>
+          <span class="trust-name pine"><span class="tn-mark">P</span>Pine Ridge Association</span>
         </div>
-        <div class="lp-body">
-          <div>
-            <div class="lp-feed-head">
-              <h4>Community</h4>
-              <div class="lp-pills">
-                <span class="lp-pill active">All</span>
-                <span class="lp-pill">🗳 Votes</span>
-                <span class="lp-pill">📢 Updates</span>
-              </div>
-            </div>
-            <div class="lp-card">
-              <div class="lp-card-label warn">Active board vote · closes in 3 days</div>
-              <h5>Install EV charging stations in the parking lot?</h5>
-              <p>The board is gathering resident input on adding 4 Level 2 EV chargers near the clubhouse.</p>
-              <div class="lp-bar"><span style="width:62%"></span></div>
-            </div>
-            <div class="lp-card">
-              <div class="lp-card-label">Pinned · 2 hours ago</div>
-              <h5>Landscaping refresh starts Monday 🌿</h5>
-              <p>Crews on-site Mon–Wed along Maple Lane. Back to normal Thursday — thanks for your patience.</p>
-            </div>
+      </div>
+
+      <!-- Product preview mock with floating cards -->
+      <div class="landing-preview-wrap" aria-hidden="true">
+        <div class="float-card fc-1">
+          <div class="fc-icon">🗳</div>
+          <div class="fc-text">
+            <div class="fc-title">89 of 142 voted</div>
+            <div class="fc-sub">EV charging proposal</div>
           </div>
-          <div class="lp-side">
-            <h4>This week</h4>
-            <div class="lp-event">
-              <div class="lp-date"><div class="m">May</div><div class="d">23</div></div>
-              <div>
-                <div class="lp-event-t">Yoga in the Park</div>
-                <div class="lp-event-s">8am · 12 going</div>
+        </div>
+        <div class="float-card fc-2">
+          <div class="fc-icon">✓</div>
+          <div class="fc-text">
+            <div class="fc-title">May dues collected</div>
+            <div class="fc-sub">94% · auto-reconciled</div>
+          </div>
+        </div>
+        <div class="landing-preview">
+          <div class="lp-chrome">
+            <span></span><span></span><span></span>
+            <div class="lp-url">commonground.app/your-community</div>
+          </div>
+          <div class="lp-body">
+            <div>
+              <div class="lp-feed-head">
+                <h4>Community</h4>
+                <div class="lp-pills">
+                  <span class="lp-pill active">All</span>
+                  <span class="lp-pill">🗳 Votes</span>
+                  <span class="lp-pill">📢 Updates</span>
+                </div>
+              </div>
+              <div class="lp-card">
+                <div class="lp-card-label warn">Active board vote · closes in 3 days</div>
+                <h5>Install EV charging stations in the parking lot?</h5>
+                <p>The board is gathering resident input on adding 4 Level 2 EV chargers near the clubhouse.</p>
+                <div class="lp-bar"><span style="width:62%"></span></div>
+              </div>
+              <div class="lp-card">
+                <div class="lp-card-label">Pinned · 2 hours ago</div>
+                <h5>Landscaping refresh starts Monday 🌿</h5>
+                <p>Crews on-site Mon–Wed along Maple Lane. Back to normal Thursday — thanks for your patience.</p>
               </div>
             </div>
-            <div class="lp-event">
-              <div class="lp-date"><div class="m">May</div><div class="d">24</div></div>
-              <div>
-                <div class="lp-event-t">Saturday Block Party 🎉</div>
-                <div class="lp-event-s">4pm · 34 going</div>
+            <div class="lp-side">
+              <h4>This week</h4>
+              <div class="lp-event">
+                <div class="lp-date"><div class="m">May</div><div class="d">23</div></div>
+                <div>
+                  <div class="lp-event-t">Yoga in the Park</div>
+                  <div class="lp-event-s">8am · 12 going</div>
+                </div>
               </div>
-            </div>
-            <div class="lp-event">
-              <div class="lp-date"><div class="m">May</div><div class="d">27</div></div>
-              <div>
-                <div class="lp-event-t">Board Meeting</div>
-                <div class="lp-event-s">7pm · open to residents</div>
+              <div class="lp-event">
+                <div class="lp-date"><div class="m">May</div><div class="d">24</div></div>
+                <div>
+                  <div class="lp-event-t">Saturday Block Party 🎉</div>
+                  <div class="lp-event-s">4pm · 34 going</div>
+                </div>
+              </div>
+              <div class="lp-event">
+                <div class="lp-date"><div class="m">May</div><div class="d">27</div></div>
+                <div>
+                  <div class="lp-event-t">Board Meeting</div>
+                  <div class="lp-event-s">7pm · open to residents</div>
+                </div>
               </div>
             </div>
           </div>
@@ -3937,16 +4179,51 @@
           <div class="icon-circle">🏡</div>
           <h3>Built for residents first</h3>
           <p>A community feed that merges board votes, neighbor polls, and maintenance updates — without becoming Nextdoor.</p>
+          <div class="mini">
+            <div class="mini-row"><span style="flex:1">EV chargers</span><div class="mini-bar"><span style="width:62%"></span></div><span class="mini-num">62%</span></div>
+            <div class="mini-row"><span style="flex:1">Start with 2</span><div class="mini-bar amber"><span style="width:24%"></span></div><span class="mini-num">24%</span></div>
+            <div class="mini-row"><span style="flex:1">Not yet</span><div class="mini-bar coral"><span style="width:14%"></span></div><span class="mini-num">14%</span></div>
+          </div>
         </div>
         <div class="pitch">
           <div class="icon-circle">📋</div>
           <h3>Transparent governance</h3>
           <p>Rules, decisions, and dues are easy to find and easy to follow. Boards moderate; residents see where the trust comes from.</p>
+          <div class="mini">
+            <div class="mini-chips">
+              <span class="chip green">✓ Approved · landscaping</span>
+              <span class="chip">✎ Updated · pool rule</span>
+              <span class="chip coral">⚠ Under review</span>
+            </div>
+          </div>
         </div>
         <div class="pitch">
           <div class="icon-circle">👋</div>
           <h3>Neighbors, not strangers</h3>
           <p>Block-level views, neighbor recommendations, and welcome rituals make the platform a seed for real-world community.</p>
+          <div class="mini">
+            <div class="mini-row" style="gap:4px;">
+              <div class="mini-faces">
+                <span class="face f1">N</span>
+                <span class="face f2">P</span>
+                <span class="face f3">C</span>
+                <span class="face f4">H</span>
+              </div>
+              <span class="more">+30 from your block going</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial -->
+      <div class="landing-testimonial">
+        <p class="quote">For the first time, our HOA actually feels like a neighborhood. People are showing up to votes, signing up for events, and quietly handling the small stuff in the feed. The board's inbox got 70% quieter — and dues collection hit 94%.</p>
+        <div class="byline">
+          <div class="byline-avatar">DR</div>
+          <div>
+            <div class="byline-name">Diane Reyes</div>
+            <div class="byline-role">Board President · Maple Grove HOA, 142 households</div>
+          </div>
         </div>
       </div>
 
